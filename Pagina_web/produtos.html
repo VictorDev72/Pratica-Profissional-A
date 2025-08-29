@@ -12,7 +12,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #F3E9DC;
+            background-color: #FFEFDA;
             color: #5E3023;
         }
 
@@ -22,7 +22,7 @@
             align-items: center;
             padding: 15px 20px;
             
-            background-color: #11111121;
+            background-color: #E6CBA8;
         }
 
         .logo {
@@ -53,7 +53,7 @@
         }
 
         .card {
-            width: 15em;
+            
             background-color: #fff;
             padding: 15px;
             border-radius: 10px;
@@ -73,6 +73,13 @@
         .card p {
             font-size: 14px;
             color: #333;
+        }
+        .card > img {
+            display: block;
+            margin: 0 auto;
+            width: 10em;
+            height: 10em;
+            object-fit: contain;
         }
 
         #filtro{
@@ -127,11 +134,13 @@
         .card_carrinho{
             background-color: #ccc;
             padding: 1em;
+            margin: 10px;
             width: 20em;
-            
+            border-radius: 10px;
         }
-
+        
         button{
+            float: left;
             border-color: darkgray;
             border-radius: 5px;
             height: 2em;
@@ -164,7 +173,7 @@
     </div>
 
     <script>
-        let url = "https://jsonplaceholder.typicode.com/photos";
+        let url = "https://fakestoreapi.com/products";
 
         fetch(url)
             .then(resposta => resposta.json())
@@ -180,7 +189,7 @@
         function opcoes(dados){
             let options = ''
             dados.forEach(element => {
-                options += `<option value='${element.nome}'>${element.nome}</option>`
+                options += `<option value='${element.category}'>${element.category}</option>`
             });
             document.querySelector('select').innerHTML = options
         }
@@ -190,9 +199,10 @@
             for (let i = 0; i < dados.length; i++){
                 produtos += `
                     <div class="card">
-                        <img src="${dados[i].url}">
-                        <p>${dados[i].title}</p>
-                        <p>Valor:$$$</p>
+                        <img src="${dados[i].image}">
+                        <h4>${dados[i].title}
+                        <p>${dados[i].description}</p>
+                        <p>Valor:${dados[i].price}</p>
                         <button onclick="addCarrinho('${dados[i].title}')">Add a cesta</button>
                     </div>
                 `;
@@ -222,3 +232,4 @@
 
 </body>
 </html>
+
