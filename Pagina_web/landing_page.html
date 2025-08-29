@@ -1,129 +1,268 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing_page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DaRoça  Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #FFEFDA;
+      color: #5E3023;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      background-color: #fff;
+      border-bottom: 2px solid #E6D5C3;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    #menu ul {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+      font-size: 20px;
+    }
+
+    #menu li {
+      cursor: pointer;
+    }
+
+    #menu button {
+      background: #5E3023;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+    }
+
+    #como_funciona {
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #catalogo {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 40px;
+    }
+
+    #catalogo img {
+      width: 250px;
+    }
+
+    #catalogo button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #5E3023;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #dicas {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 40px;
+    }
+
+    #dicas img {
+      width: 200px;
+      border-radius: 10px;
+    }
+
+    #sessao-baixo {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 40px;
+      gap: 20px;
+    }
+
+    #fale-comigo {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #fale-comigo label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    #fale-comigo input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    #fale-comigo button {
+      margin-top: 15px;
+      background: #5E3023;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    #sobre, #Avaliacao {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .avalicacao {
+      margin-bottom: 15px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    footer {
+      background: #DAB49D;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer ul {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+    }
+
+    footer li {
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div>
-            <img src="#" alt="#">
-            <img src="#" alt="#">
-        </div>
-        <div id="menu">
-            <ul>
-                <li>Carrinho</li>
-                <li>Sobre</li>
-                <li>Cadastrar-se</li>
-                <li><button>Entrar</button></li>
-            </ul>
-        </div>
-    </header>
-    <div id="corpo">
-        <h1>Frescor e praticidade direto do campo para a sua casa</h1>
+  <header>
+    <div>
+      <img src="./IMGS/LogoPronta.png" alt="Llo">
+    </div>
+    <div id="menu">
+      <ul>
+        <li>Carrinho</li>
+        <li>Sobre</li>
+        <li>Cadastrar-se</li>
+        <li><button>Entrar</button></li>
+      </ul>
+    </div>
+  </header>
 
-        <div id="como_funciona">
-            <h1>Como Funciona DaRoça?</h1>
-            <div class="card_sobre">
-                <img src="#" alt="#">
-                <h3>inserir texto</h3>
-                <p>inserir texto</p>
-            </div>
-            <div class="card_sobre">
-                <img src="#" alt="#">
-                <h3>inserir texto</h3>
-                <p>inserir texto</p>
-            </div>
-            <div class="card_sobre">
-                <img src="#" alt="#">
-                <h3>inserir texto</h3>
-                <p>inserir texto</p>
-            </div>
-        </div>
+  <h1>Frescor e praticidade direto do campo para a sua casa</h1>
 
-        <div id="catalogo">
-            <div id="">
-                <h2>Catalogo</h2>
-                <div>
-                    <h6>iserir techto</h6>
-                    <p>insarer texchto</p>
-                </div>
-                <div>
-                    <h6>iserir techto</h6>
-                    <p>insarer texchto</p>
-                </div>
-                <div>
-                    <h6>iserir techto</h6>
-                    <p>insarer texchto</p>
-                </div>
-                <button id="consira_mais_catalogo">Confira mais</button>
-            </div>
-            <img src="#" alt="#">
-        </div>
+  <div id="como_funciona">
+    <img src="./IMGS/Entrega.png" alt="">
+  </div>
 
-        <div id="dicas">
-            <div class="dica">
-                <img src="#" alt="#">
-                <h3>dasdas</h3>
-                <p>sdasd</p>
-            </div>
-            <div class="dica">
-                <img src="#" alt="#">
-                <h3>dasdas</h3>
-                <p>sdasd</p>
-            </div>
-        </div>
+  <div id="catalogo">
+    <div>
+      <h2>Catálogo</h2>
+      <div>
+        <h6>Frutas</h6>
+        <p>Banana, maçã, laranja e muito mais.</p>
+      </div>
+      <div>
+        <h6>Verduras</h6>
+        <p>Alface, couve, rúcula e opções frescas.</p>
+      </div>
+      <div>
+        <h6>Legumes</h6>
+        <p>Cenoura, batata, tomate e muito mais.</p>
+      </div>
+      <button>Confira mais</button>
+    </div>
+    <img src="#" alt="Ilustração catálogo">
+  </div>
 
-        <div id="sessao de baixo">
-            <img src="" alt="">
-            <div id="fale comigo">
-                <lable for="nome">Nome</lable>
-                <input type="text" id='nome'>
-                <lable for="nome">Sobrenome</lable>
-                <input type="text" id='nome'>
-                <lable for="nome">E-mail</lable>
-                <input type="text" id='nome'>
-                <lable for="nome">Sua mensagem</lable>
-                <input type="text" id='nome'>
+  <div id="dicas">
+    <div class="dica">
+      <img src="#" alt="">
+      <h3>Receitas da casa</h3>
+      <p>Aprenda pratos simples e saborosos.</p>
+    </div>
+    <div class="dica">
+      <img src="#" alt="">
+      <h3>Dicas de preparo</h3>
+      <p>Como conservar seus alimentos frescos.</p>
+    </div>
+  </div>
 
-                <button>Enviar</button>
-            </div>
-            <div id="sobre">
-                <h2>Sobre</h2>
-                <h3>asdasda</h3>
-                <p>sadasdasdas</p>
-            </div>
-            <div id="Avaliacao">
-                <div class="avalicacao">
-                        <h3>asdasda</h3>
-                        <div>
-                            <img src="#" alt="">
-                            <h4>sadasw</h5>
-                            <p>dasdsads</p>
-                        </div>
-                </div>
-                <div class="avalicacao">
-                        <h3>asdasda</h3>
-                        <div>
-                            <img src="#" alt="">
-                            <h4>sadasw</h5>
-                            <p>dasdsads</p>
-                        </div>
-                </div>
-                <div class="avalicacao">
-                        <h3>asdasda</h3>
-                        <div>
-                            <img src="#" alt="">
-                            <h4>sadasw</h5>
-                            <p>dasdsads</p>
-                        </div>
-                </div>
-            </div>
-        </div>
+  <div id="sessao-baixo">
+    <div id="fale-comigo">
+      <h2>Fale Conosco</h2>
+      <label for="nome">Nome</label>
+      <input type="text" id="nome">
+
+      <label for="sobrenome">Sobrenome</label>
+      <input type="text" id="sobrenome">
+
+      <label for="email">E-mail</label>
+      <input type="text" id="email">
+
+      <label for="mensagem">Sua mensagem</label>
+      <input type="text" id="mensagem">
+
+      <button>Enviar</button>
     </div>
 
+    <div id="sobre">
+      <h2>Sobre</h2>
+      <p>Levamos frescor, saúde e praticidade para dentro da sua casa com alimentos vindos diretamente do campo.</p>
+    </div>
 
+    <div id="Avaliacao">
+      <h2>Avaliações</h2>
+      <div class="avalicacao">
+        <h4>Maria</h4>
+        <p>"Produtos de ótima qualidade!"</p>
+      </div>
+      <div class="avalicacao">
+        <h4>João</h4>
+        <p>"Entrega super rápida e tudo fresco."</p>
+      </div>
+      <div class="avalicacao">
+        <h4>Clara</h4>
+        <p>"Adorei a experiência, recomendo."</p>
+      </div>
+    </div>
+  </div>
 
+  <footer>
+    <p>© 2025 DaRoça - Todos os direitos reservados</p>
+    <ul>
+      <li>Facebook</li>
+      <li>Instagram</li>
+      <li>WhatsApp</li>
+    </ul>
+  </footer>
 </body>
 </html>
