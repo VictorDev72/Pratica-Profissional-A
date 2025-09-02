@@ -1,80 +1,94 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DaRoça  Landing Page</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #FFEFDA;
-      color: #5E3023;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #FFEFDA;
+      }
+
+      header {
+          background-color: #E6CBA8;
+          width: 100%;
+          height: 100px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+        h1, h2, h3 {
+            text-align: center;
+      }
+
+    .logo{
+        width: 146px;
+        height: 71px;
     }
 
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 30px;
-      background-color: #fff;
-      border-bottom: 2px solid #E6D5C3;
+    a {
+        color: #5E3023;
+        text-decoration: none;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
-    header img {
-      height: 50px;
+    .botao {
+        color: #FFFDFD;
+        background-color: #FF8C00;
+        padding: 15px;
+        border-radius: 5px;
     }
 
-    #menu ul {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-      font-size: 20px;
+    .int_cards {
+        width: 1260px;
+        height: 640px;
+        margin: auto;
     }
 
-    #menu li {
-      cursor: pointer;
+
+    .organiza_cards {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
     }
 
-    #menu button {
-      background: #5E3023;
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 20px;
+    .card {
+        background-color: lightgray;
+        width: 300px;
+        height: 450px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 20px;
     }
 
-    h1, h2, h3 {
-      text-align: center;
-    }
-
-    #como_funciona {
-      padding: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .card img {
+        width: 150px;
+        height: 150px;
     }
 
     #catalogo {
-      display: flex;
-      align-items: center;
-      justify-content: space-around;
-      padding: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 20px;
     }
 
     #catalogo img {
-      width: 250px;
+        width: 350px;
+        height: 350px;
     }
 
     #catalogo button {
       margin-top: 20px;
       padding: 10px 20px;
-      background: #5E3023;
+      background: #FF8C00;
       color: white;
       border: none;
       border-radius: 6px;
@@ -143,7 +157,7 @@
     }
 
     footer {
-      background: #DAB49D;
+      background: #E6CBA8;
       padding: 20px;
       text-align: center;
     }
@@ -163,106 +177,132 @@
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <img src="./IMGS/LogoPronta.png" alt="Llo">
-    </div>
-    <div id="menu">
-      <ul>
-        <li>Carrinho</li>
-        <li>Sobre</li>
-        <li>Cadastrar-se</li>
-        <li><button>Entrar</button></li>
-      </ul>
-    </div>
-  </header>
+    <header>
+        <div>
+            <img class="logo" src="imagens/logo_final.png" alt="">
+        </div>
+        <div>
+            <a href="">Carrinho</a>
+            <a href="">Sobre</a>
+            <a href="">Cadastrar</a>
+            <a href="" class="botao">Entrar</a>
+        </div>
+        <div>
+            <a href="">teste</a>
+            <!-- Bom dia usuário código -->
+        </div>
+    </header>
+    <section>
+        <h1>Frescor e praticidade direto do campo para a sua casa</h1>
+        <div class="int_cards">
+            <h1>Como funciona a DaRoça?</h1>
+            <div class="organiza_cards">
+                <div class="card">
+                    <img src="imagens/motoqueiro.png" alt="">
+                    <h1>Chegou Fresquinho</h1>
+                    <p>Produtos selecionados, <br> 
+                       direto do campo para <br>
+                       a sua casa</p>
+                </div>
+                <div class="card">
+                    <img src="imagens/cesta.png" alt="">
+                    <h1>Variedade de produtos</h1>
+                    <p>Frutas, verduras, legumes, <br>
+                       itens frescos e muito mais <br>
+                       para o seu dia a dia</p>
+                </div>
+                <div class="card">
+                    <img src="imagens/cesta_verde.png" alt="">
+                    <h1>Praticidade e cuidado</h1>
+                    <p>Você escolhe a frequência <br>
+                        da entrega e recebe sua <br>
+                        cesta em veículos <br>
+                        climatizados, sempre <br>
+                        com qualidade garantida.</p>
+                </div>
+            </div>
+        </div>
+        <div id="catalogo">
+            <div>
+              <h2>Catálogo</h2>
+              <div>
+                <h6>Frutas</h6>
+                <p>Banana, maçã, laranja e muito mais.</p>
+              </div>
+              <div>
+                <h6>Verduras</h6>
+                <p>Alface, couve, rúcula e opções frescas.</p>
+              </div>
+              <div>
+                <h6>Legumes</h6>
+                <p>Cenoura, batata, tomate e muito mais.</p>
+              </div>
+              <button>Confira mais</button>
+            </div>
+            <img src="imagens/frutas.png" alt="Ilustração catálogo">
+          </div>
+        
+          <div id="dicas">
+            <div class="dica">
+              <img src="#" alt="">
+              <h3>Receitas da casa</h3>
+              <p>Aprenda pratos simples e saborosos.</p>
+            </div>
+            <div class="dica">
+              <img src="#" alt="">
+              <h3>Dicas de preparo</h3>
+              <p>Como conservar seus alimentos frescos.</p>
+            </div>
+          </div>
+        
+          <div id="sessao-baixo">
+            <div id="fale-comigo">
+              <h2>Fale Conosco</h2>
+              <label for="nome">Nome</label>
+              <input type="text" id="nome">
+        
+              <label for="sobrenome">Sobrenome</label>
+              <input type="text" id="sobrenome">
+        
+              <label for="email">E-mail</label>
+              <input type="text" id="email">
+        
+              <label for="mensagem">Sua mensagem</label>
+              <input type="text" id="mensagem">
+        
+              <button>Enviar</button>
+            </div>
+        
+            <div id="sobre">
+              <h2>Sobre</h2>
+              <p>Levamos frescor, saúde e praticidade para dentro da sua casa com alimentos vindos diretamente do campo.</p>
+            </div>
+        
+            <div id="Avaliacao">
+              <h2>Avaliações</h2>
+              <div class="avalicacao">
+                <h4>Maria</h4>
+                <p>"Produtos de ótima qualidade!"</p>
+              </div>
+              <div class="avalicacao">
+                <h4>João</h4>
+                <p>"Entrega super rápida e tudo fresco."</p>
+              </div>
+              <div class="avalicacao">
+                <h4>Clara</h4>
+                <p>"Adorei a experiência, recomendo."</p>
+              </div>
+            </div>
+          </div>
+    </section>
+    <footer>
+        <p>© 2025 DaRoça - Todos os direitos reservados</p>
+        <ul>
+          <li><a>Facebook></a></li>
+          <li>Instagram</li>
+          <li>WhatsApp</li>
+        </ul>
+      </footer>
 
-  <h1>Frescor e praticidade direto do campo para a sua casa</h1>
-
-  <div id="como_funciona">
-    <img src="./IMGS/Entrega.png" alt="">
-  </div>
-
-  <div id="catalogo">
-    <div>
-      <h2>Catálogo</h2>
-      <div>
-        <h6>Frutas</h6>
-        <p>Banana, maçã, laranja e muito mais.</p>
-      </div>
-      <div>
-        <h6>Verduras</h6>
-        <p>Alface, couve, rúcula e opções frescas.</p>
-      </div>
-      <div>
-        <h6>Legumes</h6>
-        <p>Cenoura, batata, tomate e muito mais.</p>
-      </div>
-      <button>Confira mais</button>
-    </div>
-    <img src="#" alt="Ilustração catálogo">
-  </div>
-
-  <div id="dicas">
-    <div class="dica">
-      <img src="#" alt="">
-      <h3>Receitas da casa</h3>
-      <p>Aprenda pratos simples e saborosos.</p>
-    </div>
-    <div class="dica">
-      <img src="#" alt="">
-      <h3>Dicas de preparo</h3>
-      <p>Como conservar seus alimentos frescos.</p>
-    </div>
-  </div>
-
-  <div id="sessao-baixo">
-    <div id="fale-comigo">
-      <h2>Fale Conosco</h2>
-      <label for="nome">Nome</label>
-      <input type="text" id="nome">
-
-      <label for="sobrenome">Sobrenome</label>
-      <input type="text" id="sobrenome">
-
-      <label for="email">E-mail</label>
-      <input type="text" id="email">
-
-      <label for="mensagem">Sua mensagem</label>
-      <input type="text" id="mensagem">
-
-      <button>Enviar</button>
-    </div>
-
-    <div id="sobre">
-      <h2>Sobre</h2>
-      <p>Levamos frescor, saúde e praticidade para dentro da sua casa com alimentos vindos diretamente do campo.</p>
-    </div>
-
-    <div id="Avaliacao">
-      <h2>Avaliações</h2>
-      <div class="avalicacao">
-        <h4>Maria</h4>
-        <p>"Produtos de ótima qualidade!"</p>
-      </div>
-      <div class="avalicacao">
-        <h4>João</h4>
-        <p>"Entrega super rápida e tudo fresco."</p>
-      </div>
-      <div class="avalicacao">
-        <h4>Clara</h4>
-        <p>"Adorei a experiência, recomendo."</p>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <p>© 2025 DaRoça - Todos os direitos reservados</p>
-    <ul>
-      <li>Facebook</li>
-      <li>Instagram</li>
-      <li>WhatsApp</li>
-    </ul>
-  </footer>
 </body>
 </html>
