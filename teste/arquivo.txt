@@ -1,1 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div>
+            <img class="logo" src="imagens/logo_final.png" alt="">
+        </div>
+        <div>
+            <a href="">Carrinho</a>
+            <a href="">Sobre</a>
+            <a href="">Cadastrar</a>
+            <a href="" class="botao">Entrar</a>
+        </div>
+        <div>
+            <a href="">teste</a>
+            <!-- Bom dia usuário código -->
+        </div>
+    </header>
+    <section>
+        <h1>Frescor e praticidade direto do campo para a sua casa</h1>
+        <div class="int_cards">
+            <h1>Como funciona a DaRoça?</h1>
+            <div class="organiza_cards">
+                <div class="card">
+                    <img src="imagens/motoqueiro.png" alt="">
+                    <h1>Chegou Fresquinho</h1>
+                    <p>Produtos selecionados, <br> 
+                       direto do campo para <br>
+                       a sua casa</p>
+                </div>
+                <div class="card">
+                    <img src="imagens/cesta.png" alt="">
+                    <h1>Variedade de produtos</h1>
+                    <p>Frutas, verduras, legumes, <br>
+                       itens frescos e muito mais <br>
+                       para o seu dia a dia</p>
+                </div>
+                <div class="card">
+                    <img src="imagens/cesta_verde.png" alt="">
+                    <h1>Praticidade e cuidado</h1>
+                    <p>Você escolhe a frequência <br>
+                        da entrega e recebe sua <br>
+                        cesta em veículos <br>
+                        climatizados, sempre <br>
+                        com qualidade garantida.</p>
+                </div>
+            </div>
+        </div>
+        <div id="catalogo">
+            <div>
+              <h2>Catálogo</h2>
+              <div>
+                <h6>Frutas</h6>
+                <p>Banana, maçã, laranja e muito mais.</p>
+              </div>
+              <div>
+                <h6>Verduras</h6>
+                <p>Alface, couve, rúcula e opções frescas.</p>
+              </div>
+              <div>
+                <h6>Legumes</h6>
+                <p>Cenoura, batata, tomate e muito mais.</p>
+              </div>
+              <button>Confira mais</button>
+            </div>
+            <img src="imagens/frutas.png" alt="Ilustração catálogo">
+          </div>
+        
+          <div id="dicas">
+            <div class="dica">
+              <img src="#" alt="">
+              <h3>Receitas da casa</h3>
+              <p>Aprenda pratos simples e saborosos.</p>
+            </div>
+            <div class="dica">
+              <img src="#" alt="">
+              <h3>Dicas de preparo</h3>
+              <p>Como conservar seus alimentos frescos.</p>
+            </div>
+          </div>
+        
+          <div id="sessao-baixo">
+            <div id="fale-comigo">
+              <h2>Fale Conosco</h2>
+              <label for="nome">Nome</label>
+              <input type="text" id="nome">
+        
+              <label for="sobrenome">Sobrenome</label>
+              <input type="text" id="sobrenome">
+        
+              <label for="email">E-mail</label>
+              <input type="text" id="email">
+        
+              <label for="mensagem">Sua mensagem</label>
+              <input type="text" id="mensagem">
+        
+              <button>Enviar</button>
+            </div>
+        
+            <div id="sobre">
+              <h2>Sobre</h2>
+              <p>Levamos frescor, saúde e praticidade para dentro da sua casa com alimentos vindos diretamente do campo.</p>
+            </div>
+        
+            <div id="Avaliacao">
+              <h2>Avaliações</h2>
+              <div class="avalicacao">
+                <h4>Maria</h4>
+                <p>"Produtos de ótima qualidade!"</p>
+              </div>
+              <div class="avalicacao">
+                <h4>João</h4>
+                <p>"Entrega super rápida e tudo fresco."</p>
+              </div>
+              <div class="avalicacao">
+                <h4>Clara</h4>
+                <p>"Adorei a experiência, recomendo."</p>
+              </div>
+            </div>
+          </div>
+    </section>
+    <footer>
+        <p>© 2025 DaRoça - Todos os direitos reservados</p>
+        <ul>
+          <li><a>Facebook></a></li>
+          <li>Instagram</li>
+          <li>WhatsApp</li>
+        </ul>
+      </footer>
 
+</body>
+</html>
