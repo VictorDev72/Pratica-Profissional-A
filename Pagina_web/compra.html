@@ -1,4 +1,11 @@
-body {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
     margin: 0;
     padding: 0;
     background-color: #FFEFDA;
@@ -125,3 +132,95 @@ footer li {
 footer ul li a:hover {
   color: white;
 }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img class="logo" src="imagens/logo_final.png" alt="">
+        </div>
+        <div>
+            <a href="">Carrinho</a>
+            <a href="">Sobre</a>
+            <a href="">Cadastrar</a>
+            <a href="" class="botao">Entrar</a>
+        </div>
+        <div>
+            <a href="">teste</a>
+            <!-- Bom dia usuário código -->
+        </div>
+    </header>
+    <section>
+        <h1>FINALIZE SUA COMPRA</h1>
+        <form>
+            <label>Nome:</label>
+            <input type="text" name="nome">
+
+            <label>E-mail</label>
+            <input type="email" name="email">
+
+            <div class="row">
+                <div>
+                <label>Celular com DDD</label>
+                <input type="tel" name="celular">
+                </div>
+                <div>
+                <label>CPF/CNPJ</label>
+                <input type="text" name="cpf">
+                </div>
+            </div>
+
+            <label>Endereço</label>
+            <input type="text" name="endereco">
+
+            <label>Complemento</label>
+            <input type="text" name="complemento">
+
+            <div class="cards">
+                <label>SELECIONE COMO PAGAR</label>
+                <img src="https://img.icons8.com/color/48/000000/mastercard.png"/>
+                <img src="https://img.icons8.com/color/48/000000/visa.png"/>
+            </div>
+
+            <label>Número do cartão</label>
+            <input type="text" name="numero_cartao">
+
+            <label>Seu nome impresso no cartão</label>
+            <input type="text" name="nome_cartao">
+
+            <div class="row">
+                <div>
+                <label>Validade</label>
+                <input type="text" placeholder="MM/AA" name="validade">
+                </div>
+                <div>
+                <label>CVV</label>
+                <input type="text" name="cvv">
+                </div>
+            </div>
+
+            <label>Parcelamento</label>
+            <select name="parcelamento">
+                <option>1x sem juros</option>
+                <option>2x sem juros</option>
+                <option>3x sem juros</option>
+                <option>6x</option>
+                <option>12x</option>
+            </select>
+
+            <div class="valor-total">
+                VALOR TOTAL: R$ xxxxxxxxxx
+            </div>
+
+            <button>FINALIZAR AGORA</button>
+            </form>
+    </section>
+    <footer>
+        <p>© 2025 DaRoça - Todos os direitos reservados</p>
+        <ul>
+          <li><a>Facebook</a></li>
+          <li><a>Instagram</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
