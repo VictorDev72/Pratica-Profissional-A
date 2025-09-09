@@ -13,32 +13,35 @@
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 40px;
+          background-color: #E6CBA8;
+          width: 100%;
+          height: 100px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+
+        h1, h2, h3 {
+            text-align: center;
+      }
+
+    .logo{
+        width: 146px;
+        height: 71px;
     }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #5E3023;
+    a {
+        color: #5E3023;
+        text-decoration: none;
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: #5E3023;
-      font-weight: bold;
-    }
-
-    .btn {
-      background-color: #f9a826;
-      color: white;
-      padding: 6px 15px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
+    .botao {
+        color: #FFFDFD;
+        background-color: #FF8C00;
+        padding: 15px;
+        border-radius: 5px;
     }
 
     .container {
@@ -107,13 +110,15 @@
 <body>
 
   <header>
-    <div class="logo">DaRoça</div>
-    <nav>
-      <a href="#">Carrinho</a>
-      <a href="#">Sobre</a>
-      <a href="#">Cadastro</a>
-      <a href="#" class="btn">Entrar</a>
-    </nav>
+    <div>
+            <a href="landing_page.html"><img class="logo" src="imagens/Logo_final.png" alt=""></a>
+    </div>
+    <div>
+            <a href="produtos.html">Carrinho</a>
+            <a href="landing_page.html">Sobre</a>
+            <a href="PaginaCadastro.html">Cadastrar</a>
+            <a href="PaginaLogin.html" class="botao">Entrar</a>
+    </div>
   </header>
 
   <main class="container">
@@ -139,3 +144,4 @@
 
 </body>
 </html>
+
