@@ -34,7 +34,7 @@
         height: 71px;
     }
 
-    header > a {
+    a {
         color: #5E3023;
         text-decoration: none;
         margin-left: 10px;
@@ -202,7 +202,7 @@
 
     <div id="carrinho"> 
         <strong>Cesta</strong>
-        <a href='compra.html'><button>Finalizar compra</button></a>
+        <button>Finalizar compra</button>
         <div id="lista_carrinho"></div>
     </div>
     <footer>
@@ -214,23 +214,29 @@
         </ul>
     </footer>
     <script>
-        let url = "https://fakestoreapi.com/products";
+        let url = "http://localhost:8090/produtos";
+        let url2 = "http://localhost:8090/categorias";
 
         fetch(url)
             .then(resposta => resposta.json())
             .then(data => {
                 console.log("Dados recebidos com sucesso")
                 exibeDados(data)
+            })
+            .catch(erro => console.error("Erro ao buscar dados:", erro));
+        
+        fetch(url2)
+            .then(resposta => resposta.json())
+            .then(data => {
+                console.log("Dados recebidos com sucesso")
                 opcoes(data)
             })
             .catch(erro => console.error("Erro ao buscar dados:", erro));
         
-        
-        
         function opcoes(dados){
             let options = ''
             dados.forEach(element => {
-                options += `<option value='${element.category}'>${element.category}</option>`
+                options += `<option value='${element.nome} onclick= "filtrar(${element.nome})"'>${element.nome}</option>`
             });
             document.querySelector('select').innerHTML = options
         }
@@ -240,13 +246,14 @@
             for (let i = 0; i < dados.length; i++){
                 produtos += `
                     <div class="card">
-                        <img src="${dados[i].image}">
-                        <h4>${dados[i].title}</h4>
-                        <p>${dados[i].id}</p>
-                        <p>Valor:${dados[i].price}</p>
-                        <button onclick="addCarrinho('${dados[i].title}')">Add a cesta</button>
+                        <img src="${dados[i].imagem}">
+                        <h4>${dados[i].nome}</h4>
+                        <p>${dados[i].descricao}</p>
+                        <p>Valor: ${dados[i].valor} R$</p>
+                        <p>Unidade: ${dados[i].unidade}</p>
+                        <button onclick="addCarrinho('${dados[i].nome}')">Add a cesta</button>
                     </div>
-                `;
+                `;//add <p>categoria, add <p>unidade, add <p>descrição 
             }
             document.getElementById("cards").innerHTML = produtos;
         }
@@ -269,12 +276,19 @@
         function removerDaLista(id){
             document.getElementById(id).remove();
         }
+
+        function filtrar(value){
+            const url = `http://localhost:8090/filtrar/:${value}`
+            fetch(url)
+                .then(resposta => resposta.json())
+                .then(data => {
+                    console.log("Dados recebidos com sucesso")
+                    exibeDados(data)
+                    
+                })
+                .catch(erro => console.error("Erro ao buscar dados:", erro));
+        }
     </script>
 
 </body>
 </html>
-
-
-
-
-
