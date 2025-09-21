@@ -23,18 +23,11 @@ async function conectaBD(){
 }
 conectaBD();
 
-app.post('/Cadastro.html', async(req,res) =>{
-    const Cadastro = await mssql.query('insert into Clientes')
-})
-
-
-
-
 
 //http://localhost:8090/produtos
 app.get("/produtos" , async (req,res) => {
     try{
-        const produtos = await mssql.query('SELECT * FROM daroca.produtos')
+        const produtos = await mssql.query('SELECT * FROM daroca2.Produtos')
         res.json(produtos.recordset)
         console.log(produtos.recordset) 
     }catch (error) {
@@ -46,7 +39,7 @@ app.get("/produtos" , async (req,res) => {
 
 app.get("/categorias" , async (req,res) => {
     try{
-        const produtos = await mssql.query('SELECT * FROM daroca.categorias')
+        const produtos = await mssql.query('SELECT * FROM daroca2.Categorias')
         res.json(produtos.recordset)
         console.log(produtos.recordset) 
     }catch (error) {
@@ -58,9 +51,9 @@ app.get("/categorias" , async (req,res) => {
 
 app.get("/filtro/:value" , async (req,res) => {
     const value = req.params.value;
-    const pesquisa = `%${value}%`
+    
     try{
-        const produtos = await mssql.query(`SELECT * FROM Produtos WHERE nome LIKE ${pesquisa};`);
+        const produtos = await mssql.query(`SELECT * FROM daroca2.Produtos WHERE categoria = ${value};`);
         console.log(produtos.recordset)
         res.json(produtos.recordset)
     }
@@ -68,6 +61,11 @@ app.get("/filtro/:value" , async (req,res) => {
         console.error("Erro ao buscar produtos:", erro);
         res.status(500).json({ erro: "Erro ao buscar produtos" });
     }
+    
+})
+
+
+app.get("/filtro_barra_de_pesquisa/:value", async (req,res) =>{
     
 })
 
@@ -84,3 +82,4 @@ app.use('/', (req,res) => res.json( {mensagem: 'Servidor em execução'}) )
 
 // iniciar o servidor
 app.listen(porta, () => console.log("API funcionando!"))
+
