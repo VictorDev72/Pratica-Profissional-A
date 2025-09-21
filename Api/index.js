@@ -23,11 +23,18 @@ async function conectaBD(){
 }
 conectaBD();
 
+app.post('/Cadastro.html', async(req,res) =>{
+    const Cadastro = await mssql.query('insert into Clientes')
+})
+
+
+
+
 
 //http://localhost:8090/produtos
 app.get("/produtos" , async (req,res) => {
     try{
-        const produtos = await mssql.query('SELECT * FROM daroca2.Produtos')
+        const produtos = await mssql.query('SELECT * FROM daroca.produtos')
         res.json(produtos.recordset)
         console.log(produtos.recordset) 
     }catch (error) {
@@ -39,7 +46,7 @@ app.get("/produtos" , async (req,res) => {
 
 app.get("/categorias" , async (req,res) => {
     try{
-        const produtos = await mssql.query('SELECT * FROM daroca2.Categorias')
+        const produtos = await mssql.query('SELECT * FROM daroca.categorias')
         res.json(produtos.recordset)
         console.log(produtos.recordset) 
     }catch (error) {
