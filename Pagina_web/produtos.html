@@ -238,11 +238,12 @@
         let url = "http://localhost:8090/produtos";
         let url2 = "http://localhost:8090/categorias";
         let totalCarrinho = 0;
-
+        let todosProdutos = [];
         fetch(url)
             .then(resposta => resposta.json())
             .then(data => {
                 console.log("Dados recebidos com sucesso")
+                todosProdutos = data
                 exibeDados(data)
             })
             .catch(erro => console.error("Erro ao buscar dados:", erro));
@@ -257,7 +258,7 @@
 
         function opcoes(dados) {
             
-            let options = ''
+            let options = '<option value="">Todos</option>'; // opção para resetar filtro
             dados.forEach(element => {
                 options += `<option value='${element.id}''>${element.nome}</option>`
             });
@@ -303,6 +304,12 @@
 
         function filtrar(value) {
             //console.log(value)
+            if (value == '') {
+                exibeDados(todosProdutos)
+            }
+            
+        
+            
             const url = `http://localhost:8090/filtrar/${value}`
             fetch(url)
                 .then(resposta => resposta.json())
