@@ -201,12 +201,24 @@
         <select name="categorias" id="cat" onchange= "filtrar(Document.querySelector('select').value)"></select>
     </div>
     
-    <div id="cards"></div>
+    <div id="cards">
+
+        <div class="card">
+                        <img src="${dados[i].imagem}">
+                        <h4>${dados[i].nome}</h4>
+                        <p>${dados[i].descricao}</p>
+                        <p>Valor: ${dados[i].valor} R$</p>
+                        <p>Unidade: ${dados[i].unidade}</p>
+                        <button onclick="addCarrinho('dadosi.nome',1)">Add a cesta</button>
+        </div>
+
+    </div>
 
     <div id="carrinho"> 
         <div>
             <strong>Cesta</strong><a id="soma_carrinho"></a>
-            <button><a href="compra.html">Finalizar compra</a></button>
+            <button>Finalizar compra</button>
+            
         </div>
         
         <div id="lista_carrinho"></div>
@@ -258,7 +270,7 @@
                         <p>${dados[i].descricao}</p>
                         <p>Valor: ${dados[i].valor} R$</p>
                         <p>Unidade: ${dados[i].unidade}</p>
-                        <button onclick="addCarrinho('${dados[i].nome},${dados[i].valor}')">Add a cesta</button>
+                        <button onclick="addCarrinho('${dados[i].nome}',${dados[i].valor})">Add a cesta</button>
                     </div>
                 `;//add <p>categoria, add <p>unidade, add <p>descrição 
             }
@@ -273,15 +285,16 @@
                 lista += `
                     <div class="card_carrinho" id='${id}'>
                         <p>${nome} - R$ ${valor.toFixed(2)} </p>
-                        <button onclick="removerDaLista('${id}')">remover
+                        <button onclick="removerDaLista('${id}',${valor})">remover
                     </div>
                 `;
             document.getElementById("lista_carrinho").innerHTML += lista;
             preco_carrinho_add(valor)
         }
 
-        function removerDaLista(id){
+        function removerDaLista(id,valor){
             document.getElementById(id).remove();
+            preco_carrinho_subtract(valor)
         }
 
         function filtrar(value){
@@ -301,8 +314,12 @@
             document.getElementById("soma_carrinho").innerText = 
             `Total: R$ ${totalCarrinho.toFixed(2)}`;
         }
+        function preco_carrinho_subtract(valor){
+            totalCarrinho -= valor;
+            document.getElementById("soma_carrinho").innerText = 
+            `Total: R$ ${totalCarrinho.toFixed(2)}`;
+        }
     </script>
 
 </body>
 </html>
-
