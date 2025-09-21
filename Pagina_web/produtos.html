@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -251,7 +252,7 @@
                         <p>${dados[i].descricao}</p>
                         <p>Valor: ${dados[i].valor} R$</p>
                         <p>Unidade: ${dados[i].unidade}</p>
-                        <button onclick="addCarrinho('${dados[i].nome}')">Add a cesta</button>
+                        <button onclick="addCarrinho('${dados[i].nome}','${dados[i].valor}')">Add a cesta</button>
                     </div>
                 `;//add <p>categoria, add <p>unidade, add <p>descrição 
             }
@@ -259,14 +260,14 @@
         }
 
         let itemId = 0
-        function addCarrinho(nome){
+        function addCarrinho(nome,valor){
             
             itemId++;
             const id = `item_${itemId}`;
             let lista = ''
                 lista += `
                     <div class="card_carrinho" id='${id}'>
-                        <p>${nome}</p>
+                        <p>${nome} - ${valor} R$</p>
                         <button onclick="removerDaLista('${id}')">remover
                     </div>
                 `;
