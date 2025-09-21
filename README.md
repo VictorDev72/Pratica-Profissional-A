@@ -1,5 +1,5 @@
 # Pratica-Profissional-A
 
-Victor Fernandes Ohland  RA 25572 |
+| Victor Fernandes Ohland  RA 25572 |
 Rafael Bom Conselho Schmal  RA 25346 |
 Gabriel Gomes Santos  RA 25325 |
