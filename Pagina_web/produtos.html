@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -115,14 +114,14 @@
             right: 0;
             
         }
-        #carrinho > button{
+        #carrinho > div > button{
             float: right;
             background-color: orange;
             border: none;
             border-radius: 3px;
             height: 2em;
         }
-        #carrinho > strong{
+        #carrinho > div > strong{
             color: #be8b8b;
             padding: 10px;
         }
@@ -174,6 +173,9 @@
         footer li {
             cursor: pointer;
         }
+        #soma_carrinho{
+            color: orange;
+        }
     </style>
 </head>
 <body>
@@ -196,14 +198,17 @@
     <h1>MONTE SEU CARRINHO</h1>
     <div id="filtro">
         <input type="text" placeholder="pesquise por seus produtos!!">
-        <select name="categorias" id="cat"></select>
+        <select name="categorias" id="cat" onchange= "filtrar(Document.querySelector('select').value)"></select>
     </div>
     
     <div id="cards"></div>
 
     <div id="carrinho"> 
-        <strong>Cesta</strong>
-        <button>Finalizar compra</button>
+        <div>
+            <strong>Cesta</strong><a id="soma_carrinho"></a>
+            <button><a href="compra.html">Finalizar compra</a></button>
+        </div>
+        
         <div id="lista_carrinho"></div>
     </div>
     <footer>
@@ -217,6 +222,7 @@
     <script>
         let url = "http://localhost:8090/produtos";
         let url2 = "http://localhost:8090/categorias";
+        let totalCarrinho = 0;
 
         fetch(url)
             .then(resposta => resposta.json())
@@ -237,7 +243,7 @@
         function opcoes(dados){
             let options = ''
             dados.forEach(element => {
-                options += `<option value='${element.nome} onclick= "filtrar(${element.nome})"'>${element.nome}</option>`
+                options += `<option value='${element.nome} "'>${element.nome}</option>`
             });
             document.querySelector('select').innerHTML = options
         }
@@ -252,7 +258,7 @@
                         <p>${dados[i].descricao}</p>
                         <p>Valor: ${dados[i].valor} R$</p>
                         <p>Unidade: ${dados[i].unidade}</p>
-                        <button onclick="addCarrinho('${dados[i].nome}','${dados[i].valor}')">Add a cesta</button>
+                        <button onclick="addCarrinho('${dados[i].nome},${dados[i].valor}')">Add a cesta</button>
                     </div>
                 `;//add <p>categoria, add <p>unidade, add <p>descrição 
             }
@@ -261,17 +267,17 @@
 
         let itemId = 0
         function addCarrinho(nome,valor){
-            
             itemId++;
             const id = `item_${itemId}`;
             let lista = ''
                 lista += `
                     <div class="card_carrinho" id='${id}'>
-                        <p>${nome} - ${valor} R$</p>
+                        <p>${nome} - R$ ${valor.toFixed(2)} </p>
                         <button onclick="removerDaLista('${id}')">remover
                     </div>
                 `;
             document.getElementById("lista_carrinho").innerHTML += lista;
+            preco_carrinho_add(valor)
         }
 
         function removerDaLista(id){
@@ -289,7 +295,14 @@
                 })
                 .catch(erro => console.error("Erro ao buscar dados:", erro));
         }
+
+        function preco_carrinho_add(valor){
+            totalCarrinho += valor;
+            document.getElementById("soma_carrinho").innerText = 
+            `Total: R$ ${totalCarrinho.toFixed(2)}`;
+        }
     </script>
 
 </body>
 </html>
+
