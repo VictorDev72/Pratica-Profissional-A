@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,36 +18,39 @@
         }
 
         header {
-          background-color: #E6CBA8;
-          width: 100%;
-          height: 100px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-      }
+            background-color: #E6CBA8;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             text-align: center;
-      }
+        }
 
-    .logo{
-        width: 146px;
-        height: 71px;
-    }
+        .logo {
+            width: 146px;
+            height: 71px;
+        }
 
-    a {
-        color: #5E3023;
-        text-decoration: none;
-        margin-left: 10px;
-        margin-right: 10px;
-    }
+        a {
+            color: #5E3023;
+            text-decoration: none;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
 
-    .botao {
-        color: #FFFDFD;
-        background-color: #FF8C00;
-        padding: 15px;
-        border-radius: 5px;
-    }
+        .botao {
+            color: #FFFDFD;
+            background-color: #FF8C00;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
         #cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -57,11 +61,11 @@
         }
 
         .card {
-            
+
             background-color: #fff;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0px 3px 8px rgba(0,0,0,0.2);
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
             transition: transform 0.2s;
             width: 100%;
         }
@@ -70,12 +74,13 @@
             transform: translateY(-5px);
         }
 
-        
+
         .card p {
             font-size: 14px;
             color: #333;
         }
-        .card > img {
+
+        .card>img {
             display: block;
             margin: 0 auto;
             width: 10em;
@@ -83,64 +88,72 @@
             object-fit: contain;
         }
 
-        #filtro{
+        #filtro {
             display: flex;
-            
+
             padding: 1em 0em;
             justify-items: center;
             justify-content: center;
             gap: 50em;
         }
-        #filtro > input{
+
+        #filtro>input {
             width: 20em;
             height: 2em;
             border: none;
-            border-radius: 5px; 
+            border-radius: 5px;
             background-color: #D9D9D9;
         }
-        #filtro > select{
+
+        #filtro>select {
             border: none;
             width: 10em;
             border-radius: 5px;
         }
 
 
-        #carrinho{
+        #carrinho {
             background-color: #5a2e15;
             padding: 10px;
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            
+
         }
-        #carrinho > div > button{
+
+        #carrinho>div>button {
             float: right;
             background-color: orange;
             border: none;
             border-radius: 3px;
             height: 2em;
         }
-        #carrinho > div > strong{
+
+        #carrinho>div>strong {
             color: #be8b8b;
             padding: 10px;
         }
-        #lista_carrinho{
+
+        #lista_carrinho {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            max-height: 200px;   /* altura máxima do carrinho */
-            overflow-y: auto;    /* ativa a rolagem vertical */
+            max-height: 200px;
+            /* altura máxima do carrinho */
+            overflow-y: auto;
+            /* ativa a rolagem vertical */
         }
-        .card_carrinho{
+
+        .card_carrinho {
             background-color: #ccc;
             padding: 1em;
             margin: 10px;
             width: 20em;
             border-radius: 10px;
         }
-        
-        button{
+
+        button {
             float: left;
             border-color: darkgray;
             border-radius: 5px;
@@ -167,17 +180,19 @@
             list-style: none;
             padding: 0;
             margin: 10px 0 0;
-            padding-bottom:  100px;
+            padding-bottom: 100px;
         }
 
         footer li {
             cursor: pointer;
         }
-        #soma_carrinho{
+
+        #soma_carrinho {
             color: orange;
         }
     </style>
 </head>
+
 <body>
     <header>
         <div>
@@ -194,30 +209,29 @@
             <!-- Bom dia usuário código -->
         </div>
     </header>
-    
+
     <h1>MONTE SEU CARRINHO</h1>
     <div id="filtro">
         <input type="text" placeholder="pesquise por seus produtos!!">
-        <select name="categorias" id="cat" onchange="filtrar(this.value)"></select>
+        <select name="categorias" id="cat" onchange='filtrar(this.value)'></select>
     </div>
-    
+
     <div id="cards"></div>
 
-    <div id="carrinho"> 
+    <div id="carrinho">
         <div>
             <strong>Cesta</strong><a id="soma_carrinho"></a>
-            <button>Finalizar compra</button>
-            
+            <button><a href="compra.html">Finalizar compra</a></button>
         </div>
-        
+
         <div id="lista_carrinho"></div>
     </div>
     <footer>
         <p>© 2025 DaRoça - Todos os direitos reservados</p>
         <ul>
-          <li><a>Facebook></a></li>
-          <li>Instagram</li>
-          <li>WhatsApp</li>
+            <li><a>Facebook></a></li>
+            <li>Instagram</li>
+            <li>WhatsApp</li>
         </ul>
     </footer>
     <script>
@@ -232,7 +246,7 @@
                 exibeDados(data)
             })
             .catch(erro => console.error("Erro ao buscar dados:", erro));
-        
+
         fetch(url2)
             .then(resposta => resposta.json())
             .then(data => {
@@ -240,18 +254,19 @@
                 opcoes(data)
             })
             .catch(erro => console.error("Erro ao buscar dados:", erro));
-        
-        function opcoes(dados){
+
+        function opcoes(dados) {
+            
             let options = ''
             dados.forEach(element => {
-                options += `<option value='${element.id}'>${element.nome}</option>`
+                options += `<option value='${element.id}''>${element.nome}</option>`
             });
             document.querySelector('select').innerHTML = options
         }
-        
-        function exibeDados(dados){
+
+        function exibeDados(dados) {
             let produtos = "";
-            for (let i = 0; i < dados.length; i++){
+            for (let i = 0; i < dados.length; i++) {
                 produtos += `
                     <div class="card">
                         <img src="${dados[i].imagem}">
@@ -259,7 +274,7 @@
                         <p>${dados[i].descricao}</p>
                         <p>Valor: ${dados[i].valor} R$</p>
                         <p>Unidade: ${dados[i].unidade}</p>
-                        <button onclick="addCarrinho('${dados[i].nome}',${dados[i].valor})">Add a cesta</button>
+                        <button onclick="addCarrinho('${dados[i].nome}', ${dados[i].valor})">Add a cesta</button>
                     </div>
                 `;//add <p>categoria, add <p>unidade, add <p>descrição 
             }
@@ -267,48 +282,53 @@
         }
 
         let itemId = 0
-        function addCarrinho(nome,valor){
+        function addCarrinho(nome, valor) {
             itemId++;
             const id = `item_${itemId}`;
             let lista = ''
-                lista += `
+            lista += `
                     <div class="card_carrinho" id='${id}'>
                         <p>${nome} - R$ ${valor.toFixed(2)} </p>
-                        <button onclick="removerDaLista('${id}',${valor})">remover
+                        <button onclick="removerDaLista('${id}', ${valor})">remover
                     </div>
                 `;
             document.getElementById("lista_carrinho").innerHTML += lista;
             preco_carrinho_add(valor)
         }
 
-        function removerDaLista(id,valor){
+        function removerDaLista(id, valor) {
             document.getElementById(id).remove();
             preco_carrinho_subtract(valor)
         }
 
-        function filtrar(value){
-            const url = `http://localhost:8090/filtro/${value}`
+        function filtrar(value) {
+            //console.log(value)
+            const url = `http://localhost:8090/filtrar/${value}`
             fetch(url)
                 .then(resposta => resposta.json())
                 .then(data => {
                     console.log("Dados recebidos com sucesso")
+                    console.log(data)
                     exibeDados(data)
-                    
+
                 })
-                .catch(erro => console.error("Erro ao buscar dados:", erro));
+
         }
 
-        function preco_carrinho_add(valor){
+        function preco_carrinho_add(valor) {
             totalCarrinho += valor;
-            document.getElementById("soma_carrinho").innerText = 
-            `Total: R$ ${totalCarrinho.toFixed(2)}`;
+            document.getElementById("soma_carrinho").innerText =
+                `Total: R$ ${totalCarrinho.toFixed(2)}`;
         }
-        function preco_carrinho_subtract(valor){
+
+        function preco_carrinho_subtract(valor) {
             totalCarrinho -= valor;
-            document.getElementById("soma_carrinho").innerText = 
-            `Total: R$ ${totalCarrinho.toFixed(2)}`;
+            document.getElementById("soma_carrinho").innerText =
+                `Total: R$ ${totalCarrinho.toFixed(2)}`;
         }
+
     </script>
 
 </body>
+
 </html>
