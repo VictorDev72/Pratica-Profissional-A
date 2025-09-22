@@ -137,12 +137,40 @@
         <label for="senha">Senha</label>
         <input type="password" id="senha" placeholder="Ex: 123123">
 
-        <button type="submit" class="btn-submit">Cadastrar</button>
+        <button type="submit" class="btn-submit" onclick="cadastrar()">Cadastrar-se</button>
       </form>
     </div>
   </main>
+  <script>
+    function cadastrar(){
+      let url = 'http://localhost:8090/Cadastro'
 
-</body>
-</html>
+      let nome = document.getElementById('nome').value
+      let email = document.getElementById('email').value
+      let celular = document.getElementById('celular').value
+      let senha = document.getElementById('senha').value
+      let option = {
+        method: "POST",
+        headers : {"content-type":"argument/json"},
+        body: JSON.stringify({
+          "nome" : nome,
+          "email" : email,
+          "celular" : celular,
+          "senha" : senha,
+        })
+        }
+      try {
+            fetch(url, opcoes)
+                .then(dados => dados.json())
+                .then(resp => console.log())
+
+          }
+          catch (error) {
+              document.getElementById('resposta').innerHTML = 'Registo deu errado';
+              console.log(error)
+          }
+      document.getElementById('resposta').innerHTML = 'Registo feito com sucesso'
+    }
+  </script>
 </body>
 </html>
