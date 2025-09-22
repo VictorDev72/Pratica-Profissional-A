@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 const porta = process.env.PORTA;
 const stringSQL = process.env.CONNECTION_STRING;
@@ -24,7 +25,19 @@ async function conectaBD() {
 conectaBD();
 
 app.post('/Cadastro', async (req, res) => {
-    const Cadastro = await mssql.query(`insert into daroca.clientes (nome,email,celular,senha) VALUES ()`)
+    
+    const nome = req.body.nome
+    const email = req.body.email
+    const celular = req.body.celular
+    const senha = req.body.senha
+    try{
+        let query = `insert into daroca.clientes (nome,email,celular,senha) VALUES (?,?,?,?)`
+        await mssql.query(query, nome, email, celular, senha)
+        res.status(201).json('Cadastro concluido') 
+    }
+    catch{
+        res.status(500).json('Erro na inclusão dos dados') 
+    }
 })
 
 
@@ -34,7 +47,7 @@ app.post('/Cadastro', async (req, res) => {
 //http://localhost:8090/produtos
 app.get("/produtos", async (req, res) => {
     try {
-        const produtos = await mssql.query('SELECT * FROM daroca.produtos')
+        const produtos = await mssql.query('SELECT * FROM daroca2.produtos')
         res.json(produtos.recordset)
         console.log(produtos.recordset)
     } catch (error) {
@@ -46,7 +59,7 @@ app.get("/produtos", async (req, res) => {
 
 app.get("/categorias", async (req, res) => {
     try {
-        const produtos = await mssql.query('SELECT * FROM daroca.categorias')
+        const produtos = await mssql.query('SELECT * FROM daroca2.categorias')
         res.json(produtos.recordset)
         console.log(produtos.recordset)
     } catch (error) {
@@ -60,7 +73,7 @@ app.get("/filtrar/:value", async (req, res) => {
     const value = req.params.value;
     console.log(value)
     try {
-        const produtos = await mssql.query(`SELECT * FROM daroca.produtos WHERE categoria = ${value}`);
+        const produtos = await mssql.query(`SELECT * FROM daroca2.produtos WHERE categoria = ${value}`);
         console.log(produtos.recordset)
         res.json(produtos.recordset)
     }
