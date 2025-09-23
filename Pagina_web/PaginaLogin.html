@@ -138,10 +138,22 @@
         <input type="password" id="senha" placeholder="Ex: 123123">
 
         <button type="submit" class="btn-submit">Entrar</button>
+        <p id="resp"></p>
       </form>
     </div>
   </main>
-
+    <script>
+      function login(){
+        url = 'http://localhost:8090/login'
+        fetch(url)
+          .then(dados => {
+            if (!dados.ok){
+              document.getElementById('resp').innerHTML = "Login efetuado com sucesso"
+            }else{
+              document.getElementById('resp').innerHTML = "Login invalido"
+            }
+          })
+      }
+    </script>
 </body>
 </html>
-
