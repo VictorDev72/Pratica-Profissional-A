@@ -142,66 +142,67 @@
       </form>
     </div>
   </main>
-    <script>
-  document.querySelector("form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Impede o envio padrão do formulário
-    login();
-  });
-  function login() {
-    const nome = document.getElementById('nome').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const celular = document.getElementById('celular').value.trim();
-    const senha = document.getElementById('senha').value.trim();
-    const resp = document.getElementById('resp');
-
-    if (!nome || !email || !celular || !senha) {
-      resp.innerText = "Preencha todos os campos.";
-      resp.style.color = "red";
-      return;
-    }
-
-    if (!email.includes("@") || !email.includes(".") || email.length < 5) {
-      resp.innerText = "Email inválido.";
-      resp.style.color = "red";
-      return;
-    }
-
-    if (celular.length < 10 || celular.length > 11) {
-      resp.innerText = "Celular inválido. Deve conter 10 ou 11 dígitos numéricos.";
-      resp.style.color = "red";
-      return;
-    }
-    const url = 'http://localhost:8090/login';
-    const cliente = {
-      nome: nome,
-      email: email,
-      celular: celular,
-      senha: senha
-    };
-
-    fetch(url, {
-      method: "POST", 
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(cliente)
-    })
-    .then(dados => {
-      if (dados.ok) {
-        resp.innerText = "Login efetuado com sucesso!";
-        resp.style.color = "green";
-      } else {
-        return dados.text().then(texto => {
-          resp.innerText = "Login inválido: " + texto;
-          resp.style.color = "red";
-        });
-      }
-    })
-    .catch(error => {
-      resp.innerText = "Erro ao conectar com o servidor.";
-      resp.style.color = "red";
-      console.error("Erro:", error);
+  <script>
+    document.querySelector("form").addEventListener("submit", function(event) {
+      event.preventDefault(); // Impede o envio padrão do formulário
+      login();
     });
-  }
+    function login() {
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const celular = document.getElementById('celular').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+      const resp = document.getElementById('resp');
+  
+      if (!nome || !email || !celular || !senha) {
+        resp.innerText = "Preencha todos os campos.";
+        resp.style.color = "red";
+        return;
+      }
+  
+      if (!email.includes("@") || !email.includes(".") || email.length < 5) {
+        resp.innerText = "Email inválido.";
+        resp.style.color = "red";
+        return;
+      }
+  
+      if (celular.length < 10 || celular.length > 11) {
+        resp.innerText = "Celular inválido. Deve conter 10 ou 11 dígitos numéricos.";
+        resp.style.color = "red";
+        return;
+      }
+      const url = 'http://localhost:8090/login';
+      const cliente = {
+        nome: nome,
+        email: email,
+        celular: celular,
+        senha: senha
+      };
+  
+      fetch(url, {
+        method: "POST", 
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(cliente)
+      })
+      .then(dados => {
+        if (dados.ok) {
+          resp.innerText = "Login efetuado com sucesso!";
+          resp.style.color = "green";
+        } else {
+          return dados.text().then(texto => {
+            resp.innerText = "Login inválido: " + texto;
+            resp.style.color = "red";
+          });
+        }
+      })
+      .catch(error => {
+        resp.innerText = "Erro ao conectar com o servidor.";
+        resp.style.color = "red";
+        console.error("Erro:", error);
+      });
+    }
+</script>
 </body>
 </html>
