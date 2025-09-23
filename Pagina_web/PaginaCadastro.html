@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -137,20 +138,20 @@
         <label for="senha">Senha</label>
         <input type="password" id="senha" placeholder="Ex: 123123">
 
-        <button type="submit" class="btn-submit" onclick="cadastrar()">Cadastrar-se</button>
+        <button type="submit" class="btn-submit" onclick="addBD(event)">Cadastrar-se</button>
       </form>
     </div>
   </main>
   <script>
-  <script>
-    async function addBD() {
+    async function addBD(event) {
+      event.preventDefault();
       const url = 'http://localhost:8090/cadastro'
 
       const nome = document.getElementById('nome').value;
       const email = document.getElementById('email').value;
       const celular = document.getElementById('celular').value;
       const senha = document.getElementById('senha').value;
-      
+      console.log(nome,email,celular,senha)
       try {
         const result = await fetch(url, {
           method: "POST",
@@ -160,14 +161,14 @@
             celular: celular,
             senha: senha
           }),
-          Headers: { 'Content-type': 'application/json' },
+          headers: { 'Content-type': 'application/json' },
         })
 
         if (result.ok) {
           console.log("Cadastro realizado com sucesso")
         }
         else {
-          console.log("Não foi possivel realizar seu cadastro" + result.mesagem);
+          console.log("Erro: ", error.message);
         }
       }
       catch (error) {
@@ -175,7 +176,6 @@
       }
     }
 
-  </script>
   </script>
 </body>
 </html>
