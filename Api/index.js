@@ -30,30 +30,36 @@ app.post('/Cadastro', async (req, res) => {
     const email = req.body.email
     const celular = req.body.celular
     const senha = req.body.senha
+    
     try{
-        let query = `insert into daroca.clientes (nome,email,celular,senha) VALUES (?,?,?,?)`
-        await mssql.query(query, nome, email, celular, senha)
-        res.status(201).json('Cadastro concluido') 
+        let query = `insert into daroca.clientes (nome,email,celular,senha) VALUES (${nome},${email},${celular},${senha})`
+        await mssql.query(query)
+        res.status(201).json({'message':'Cadastro concluido'}) 
     }
     catch{
-        res.status(500).json('Erro na inclusão dos dados') 
+        res.status(500).json({'message':'Erro na inclusão dos dados'}) 
     }
 })
 
 
-app.post('/cadastro', async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         const nome = req.body.nome;
         const email = req.body.email;
         const celular = req.body.celular;
         const senha = req.body.senha;
         console.log(nome, email, celular, senha)
-        await mssql.query(`INSERT INTO daroça.Clientes (nome,email,celular, senha) VALUES(${nome},${email},${celular},${senha})`)
-
-        res.status(201).json({ "mensagem": "Dados inseridos com sucesso." })
+        const result = await mssql.query(`Select * FROM daroça.clientes where nome = ${nome} and senha = ${senha}`)
+        if(result.rowsAffected == 1){
+            res.status(201).json({ "mensagem": "Login Valido" })
+        }
+        else{
+            res.status(500).json({message : "Invalido"})
+        }
     }
     catch (erro) {
-        console.log("Erro na inserção de dados.", erro)
+        console.log("Erro na validação de login", erro)
+        res.status(500).json({message : "Erro na verificação"})
     }
 })
 
