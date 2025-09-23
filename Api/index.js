@@ -41,6 +41,24 @@ app.post('/Cadastro', async (req, res) => {
 })
 
 
+app.post('/cadastro', async (req, res) => {
+    try {
+        const nome = req.body.nome;
+        const email = req.body.email;
+        const celular = req.body.celular;
+        const senha = req.body.senha;
+        console.log(nome, email, celular, senha)
+        await mssql.query(`INSERT INTO daroça.Clientes (nome,email,celular, senha) VALUES(${nome},${email},${celular},${senha})`)
+
+        res.status(201).json({ "mensagem": "Dados inseridos com sucesso." })
+    }
+    catch (erro) {
+        console.log("Erro na inserção de dados.", erro)
+    }
+})
+
+
+
 
 
 
