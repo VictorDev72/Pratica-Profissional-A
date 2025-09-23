@@ -144,7 +144,7 @@
   </main>
     <script>
       function login(){
-        url = 'http://localhost:8090/login'
+        let url = 'http://localhost:8090/login'
         fetch(url)
           .then(dados => {
             if (!dados.ok){
