@@ -142,35 +142,40 @@
     </div>
   </main>
   <script>
-    function cadastrar(){
-      let url = 'http://localhost:8090/Cadastro'
+  <script>
+    async function addBD() {
+      const url = 'http://localhost:8090/cadastro'
 
-      let nome = document.getElementById('nome').value
-      let email = document.getElementById('email').value
-      let celular = document.getElementById('celular').value
-      let senha = document.getElementById('senha').value
-      let option = {
-        method: "POST",
-        headers : {"content-type":"argument/json"},
-        body: JSON.stringify({
-          "nome" : nome,
-          "email" : email,
-          "celular" : celular,
-          "senha" : senha,
-        })
-        }
+      const nome = document.getElementById('nome').value;
+      const email = document.getElementById('email').value;
+      const celular = document.getElementById('celular').value;
+      const senha = document.getElementById('senha').value;
+      
       try {
-            fetch(url, opcoes)
-                .then(dados => dados.json())
-                .then(resp => console.log())
+        const result = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            nome: nome,
+            email: email,
+            celular: celular,
+            senha: senha
+          }),
+          Headers: { 'Content-type': 'application/json' },
+        })
 
-          }
-          catch (error) {
-              document.getElementById('resposta').innerHTML = 'Registo deu errado';
-              console.log(error)
-          }
-      document.getElementById('resposta').innerHTML = 'Registo feito com sucesso'
+        if (result.ok) {
+          console.log("Cadastro realizado com sucesso")
+        }
+        else {
+          console.log("Não foi possivel realizar seu cadastro" + result.mesagem);
+        }
+      }
+      catch (error) {
+        console.error("Erro na inserção", error.mesagem)
+      }
     }
+
+  </script>
   </script>
 </body>
 </html>
