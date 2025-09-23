@@ -244,6 +244,7 @@
             .then(data => {
                 console.log("Dados recebidos com sucesso")
                 todosProdutos = data
+                console.log(todosProdutos)
                 exibeDados(data)
             })
             .catch(erro => console.error("Erro ao buscar dados:", erro));
@@ -258,7 +259,7 @@
 
         function opcoes(dados) {
             
-            let options = '<option value="">Todos</option>'; // opção para resetar filtro
+            let options = '<option value = 0>Todos</option>'; // opção para resetar filtro
             dados.forEach(element => {
                 options += `<option value='${element.id}''>${element.nome}</option>`
             });
@@ -304,21 +305,23 @@
 
         function filtrar(value) {
             //console.log(value)
-            if (value == '') {
+            if (value == 0) {
                 exibeDados(todosProdutos)
+            }
+            else{
+                const url = `http://localhost:8090/filtrar/${value}`
+                fetch(url)
+                    .then(resposta => resposta.json())
+                    .then(data => {
+                        console.log("Dados recebidos com sucesso")
+                        console.log(data)
+                        exibeDados(data)
+                })  
             }
             
         
             
-            const url = `http://localhost:8090/filtrar/${value}`
-            fetch(url)
-                .then(resposta => resposta.json())
-                .then(data => {
-                    console.log("Dados recebidos com sucesso")
-                    console.log(data)
-                    exibeDados(data)
-
-                })
+            
 
         }
 
@@ -334,6 +337,15 @@
                 `Total: R$ ${totalCarrinho.toFixed(2)}`;
         }
 
+
+        document.querySelector("#filtro input").addEventListener("input", (e) => {
+            const termo = e.target.value.toLowerCase();
+            const filtrados = todosProdutos.filter(p => 
+                p.nome.toLowerCase().includes(termo) || 
+                p.descricao.toLowerCase().includes(termo));
+            exibeDados(filtrados);
+        });
+        
     </script>
 
 </body>
