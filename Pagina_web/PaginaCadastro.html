@@ -139,6 +139,7 @@
         <input type="password" id="senha" placeholder="Ex: 123123">
 
         <button type="submit" class="btn-submit" onclick="addBD(event)">Cadastrar-se</button>
+        <p id = 'resp'></p>
       </form>
     </div>
   </main>
@@ -151,11 +152,9 @@
       const email = document.getElementById('email').value;
       const celular = document.getElementById('celular').value;
       const senha = document.getElementById('senha').value;
+      const resp = document.getElementById('resp');
       console.log(nome,email,celular,senha)
-      
-      
-      try {
-        const result = await fetch(url, {
+      const options = {
           method: "POST",
           body: JSON.stringify({
             nome: nome,
@@ -164,17 +163,28 @@
             senha: senha
           }),
           headers: { 'Content-type': 'application/json' },
-        })
-
+      }
+      
+      try {
+        const result = await fetch(url, options)
         if (result.ok) {
-          console.log("Cadastro realizado com sucesso")
+          console.log("Cadastro realizado com sucesso");
+          resp.innerHTML = ('Cadastro realizado com sucesso');
+          resp.style.color = 'green'
+
         }
         else {
           console.log("Erro de cadastro não valido ");
+          resp.innerHTML = ('Erro de cadastro não valido');
+          resp.style.color = 'red'
         }
       }
       catch (error) {
-        console.error("Erro na inserção", error.message)
+        console.error("Erro na inserção", error.message);
+        resp.innerHTML = ("Erro na inserção");
+        resp.style.color = 'red'
+        
+
       }
     }
 
