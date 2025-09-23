@@ -191,8 +191,7 @@
           resp.innerText = "Login efetuado com sucesso!";
           resp.style.color = "green";
         } else {
-          return dados.text().then(texto => {
-            resp.innerText = "Login inválido: " + texto;
+            resp.innerText = "Login inválido";
             resp.style.color = "red";
           });
         }
