@@ -32,7 +32,7 @@ app.post('/Cadastro', async (req, res) => {
     const senha = req.body.senha
     
     try{
-        let query = `insert into daroca.clientes (nome,email,celular,senha) VALUES (${nome},${email},${celular},${senha})`
+        let query = `insert into daroca.clientes (nome,email,celular,senha) VALUES ('${nome}','${email}','${celular}','${senha}')`
         await mssql.query(query)
         res.status(201).json({'message':'Cadastro concluido'}) 
     }
@@ -49,8 +49,8 @@ app.post('/login', async (req, res) => {
         const celular = req.body.celular;
         const senha = req.body.senha;
         console.log(nome, email, celular, senha)
-        const result = await mssql.query(`Select * FROM daroça.clientes where nome = ${nome} and senha = ${senha}`)
-        if(result.rowsAffected == 1){
+        const result = await mssql.query(`Select * FROM daroca.clientes where nome = '${nome}' AND senha = '${senha}'`)
+        if(result.recordset.length > 0){
             res.status(201).json({ "mensagem": "Login Valido" })
         }
         else{
@@ -58,7 +58,7 @@ app.post('/login', async (req, res) => {
         }
     }
     catch (erro) {
-        console.log("Erro na validação de login", erro)
+        console.log("Erro na validação de cadastro", erro)
         res.status(500).json({message : "Erro na verificação"})
     }
 })
@@ -83,9 +83,9 @@ app.get("/produtos", async (req, res) => {
 
 app.get("/categorias", async (req, res) => {
     try {
-        const produtos = await mssql.query('SELECT * FROM daroca2.categorias')
-        res.json(produtos.recordset)
-        console.log(produtos.recordset)
+        const categorias = await mssql.query('SELECT * FROM daroca2.categorias')
+        res.json(categorias.recordset)
+        console.log(categorias.recordset)
     } catch (error) {
         console.error("Erro ao buscar produtos:", error);
         res.status(400).json({ erro: "Erro ao buscar produtos" });
