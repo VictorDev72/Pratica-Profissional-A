@@ -24,7 +24,7 @@ async function conectaBD() {
 }
 conectaBD();
 
-app.post('/Cadastro', async (req, res) => {
+app.post('/cadastro', async (req, res) => {
     
     const nome = req.body.nome
     const email = req.body.email
