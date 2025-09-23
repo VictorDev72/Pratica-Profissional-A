@@ -144,7 +144,23 @@
   </main>
     <script>
       function login(){
-        let url = 'http://localhost:8090/login'
+        const url = 'http://localhost:8090/login'
+        let cliente = {
+          nome: document.getElementById('nome').value,
+          email: document.getElementById('email').value,
+          celular: document.getElementById('celular').value,
+          senha: document.getElementById('senha').value
+        }
+        let options = {
+          method : "Get",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            "nome": cliente.nome,
+            "email" : cliente.email,
+            "celular" : cliente.celular,
+            "senha" : cliente.senha
+          })
+        }
         fetch(url)
           .then(dados => {
             if (!dados.ok){
