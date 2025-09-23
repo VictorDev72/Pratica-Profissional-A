@@ -33,12 +33,24 @@ app.post('/cadastro', async (req, res) => {
     const senha = req.body.senha
     
     try{
+        //ver ja tem nomes e email iguais
+        const check = await mssql.query(`
+            SELECT * FROM daroca.clientes 
+            WHERE email = '${email}' OR celular = '${celular}'
+        `);
+
+        if (check.recordset.length > 0) {
+            return res.status(400).json({ message: "Usuário já cadastrado com este email ou celular" });
+        }
+
+
+        //insert
         let query = `insert into daroca.clientes (nome,email,celular,senha) VALUES ('${nome}','${email}','${celular}','${senha}')`
         await mssql.query(query)
-        res.status(201).json({'message':'cadastro concluido'}) 
+        res.status(201).json({ message :'cadastro concluido'}) 
     }
     catch{
-        res.status(500).json({'message':'Erro na inclusão dos dados'}) 
+        res.status(500).json({ message :'Erro na inclusão dos dados'}) 
     }
 })
 
