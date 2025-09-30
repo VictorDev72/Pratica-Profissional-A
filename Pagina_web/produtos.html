@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
+    <script src=" https://kit.fontawesome.com/7d8c9004fe.js " crossorigin="anonymous"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -239,6 +240,7 @@
         let url2 = "http://localhost:8090/categorias";
         let totalCarrinho = 0;
         let todosProdutos = [];
+        
         fetch(url)
             .then(resposta => resposta.json())
             .then(data => {
@@ -285,22 +287,46 @@
 
         let itemId = 0
         function addCarrinho(nome, valor) {
-            itemId++;
-            const id = `item_${itemId}`;
-            let lista = ''
-            lista += `
-                    <div class="card_carrinho" id='${id}'>
-                        <p>${nome} - R$ ${valor.toFixed(2)} </p>
-                        <button onclick="removerDaLista('${id}', ${valor})">remover
-                    </div>
-                `;
+            itemId++
+            const id = `item_${itemId}`
+            
+            lista = `
+                <div class="card_carrinho" id='${id}'>
+                    <p>${nome} - R$ ${valor.toFixed(2)} -- <span class="qtd">1</span>x</p>
+                    <button onclick="add('${id}', ${valor})">+</button>
+                    <button onclick="sub('${id}', ${valor})">-</button>
+                    <button onclick="removerDaLista('${id}', ${valor})">remover</button>
+                </div>
+            `;
             document.getElementById("lista_carrinho").innerHTML += lista;
             preco_carrinho_add(valor)
         }
 
+        function add(id, valor){
+            let qtdSpan = document.getElementById(id).querySelector(".qtd");
+            let qtd = parseInt(qtdSpan.innerText) || 0;
+            qtd++;
+            qtdSpan.innerText = qtd;
+            preco_carrinho_add(valor);
+        }
+
+        function sub(id, valor){
+            let qtdSpan = document.getElementById(id).querySelector(".qtd");
+            let qtd = parseInt(qtdSpan.innerText) || 0; //Do java pega um tipo de dado e tenta transformar em inteiro, se nao conseguir transforma em 0 
+            qtd--;
+            if (qtd <= 0){
+                removerDaLista(id, valor)
+            } else {
+                qtdSpan.innerText = qtd;
+                preco_carrinho_subtract(valor);
+            }
+        }
+
         function removerDaLista(id, valor) {
+            let qtdSpan = document.getElementById(id).querySelector(".qtd");
+            let qtd = parseInt(qtdSpan.innerText) || 1;
             document.getElementById(id).remove();
-            preco_carrinho_subtract(valor)
+            preco_carrinho_subtract(valor * qtd);
         }
 
         function filtrar(value) {
@@ -351,4 +377,3 @@
 </body>
 
 </html>
-
