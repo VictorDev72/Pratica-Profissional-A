@@ -1,4 +1,4 @@
-const produtoReq = require("../Models/ModeloProdutos.js")
+const produtoReq = require("../models/ModeloProdutos.js")
 
 async function listarP(req, res) {
     try{
@@ -22,7 +22,8 @@ async function listarC(req, res) {
 
 async function filtro(req, res) {
     try{
-        const val = req.prams.value
+        const val = req.params.value
+        
         const fil = await produtoReq.filtrar(val);
         res.json(fil); 
     }catch (error) {
@@ -30,6 +31,5 @@ async function filtro(req, res) {
         res.status(500).json({ erro: "Erro ao buscar produtos filtrados" });
     }
 }
-
 
 module.exports = { listarP, listarC, filtro };
