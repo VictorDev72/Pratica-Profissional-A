@@ -106,6 +106,22 @@
     .btn-submit:hover {
       background-color: #3c1f15;
     }
+
+    #end > div > label{
+      font-size: small;
+      width: 25%;
+      padding: 10px;
+      background-color: #E6CBA8;
+      border-radius: 10px;
+      margin: 5px 0px;
+    }
+    #end > div > input{
+      margin: 0px 10px;
+      width: 25%;
+    }
+    #end > div{
+      display: flex;
+    }
   </style>
 </head>
 <body>
@@ -135,6 +151,41 @@
         <label for="celular">Celular com DDD</label>
         <input type="tel" id="celular" placeholder="(11)912345-678">
 
+        <label for="endendereco">Endereço</label>
+        <div id="end">
+          <div>
+            <label for="endendereco">Tipo:</label>
+            <input type="text" id="tipo" placeholder="Ex: rua" class="endendereco">
+          </div>
+          <div>
+            <label for="endendereco">Logradouro:</label>
+            <input type="text" id="logradouro" placeholder="Ex: Aluizio de azedo" class="endendereco">
+          </div>
+          <div>
+            <label for="endendereco">Numero:</label>
+            <input type="text" id="numero" placeholder="Ex: 200" class="endendereco">
+          </div>
+          <div>
+            <label for="endendereco">Complemento:</label>
+              <input type="text" id="complemento" placeholder="Ex: 34" class="endendereco">
+          </div>
+          <div>
+            <label for="endendereco">CEP:</label>
+              <input type="text" id="cep" placeholder="Ex: 1234-567" class="endendereco">
+          </div>
+
+          
+          
+          
+              
+              
+              
+          
+        </div>
+
+        <label for="nac">Nacimento</label>
+        <input type="date" id="nac" placeholder="Ex: 10/12/2000">
+        
         <label for="senha">Senha</label>
         <input type="password" id="senha" placeholder="Ex: 123123">
 
@@ -154,6 +205,25 @@
       const senha = document.getElementById('senha').value;
       const resp = document.getElementById('resp');
       console.log(nome,email,celular,senha)
+
+      if (!nome || !email || !celular || !senha) {
+        resp.innerText = "Preencha todos os campos.";
+        resp.style.color = "red";
+        return;
+      }
+  
+      if (!email.includes("@") || !email.includes(".") || email.length < 5) {
+        resp.innerText = "Email inválido.";
+        resp.style.color = "red";
+        return;
+      }
+  
+      if (celular.length < 10 || celular.length > 11) {
+        resp.innerText = "Celular inválido. Deve conter 10 ou 11 dígitos numéricos.";
+        resp.style.color = "red";
+        return;
+      }
+      
       const options = {
           method: "POST",
           body: JSON.stringify({
