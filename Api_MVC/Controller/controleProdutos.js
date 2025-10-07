@@ -1,4 +1,4 @@
-const produtoReq = require("../models/ModeloProdutos.js")
+const produtoReq = require("../Models/ModeloProdutos.js")
 
 async function listarP(req, res) {
     try{
@@ -30,5 +30,6 @@ async function filtro(req, res) {
         res.status(500).json({ erro: "Erro ao buscar produtos filtrados" });
     }
 }
+
 
 module.exports = { listarP, listarC, filtro };
