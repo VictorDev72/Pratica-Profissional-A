@@ -236,7 +236,7 @@
         return;
       }
 
-      if (cep != 8 || !cep.includes("-")) {
+      if (cep.length != 8 || !cep.includes("-")) {
         resp.innerText = "Cep inválido. Deve conter 7 dígitos numéricos e um traço ex: 1234-567.";
         resp.style.color = "red";
         return;
