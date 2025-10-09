@@ -1,379 +1,397 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Produtos</title>
-    <script src=" https://kit.fontawesome.com/7d8c9004fe.js " crossorigin="anonymous"></script>
+    <script
+      src=" https://kit.fontawesome.com/7d8c9004fe.js "
+      crossorigin="anonymous"
+    ></script>
     <style>
-        * {
-            box-sizing: border-box;
-        }
+      :root {
+        --primary-color: #ffefda;
+      }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #FFEFDA;
-            color: #5E3023;
-        }
+      * {
+        box-sizing: border-box;
+      }
 
-        header {
-            background-color: #E6CBA8;
-            width: 100%;
-            height: 100px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: var(--primary-color);
+        color: #5e3023;
+      }
 
-        h1,
-        h2,
-        h3 {
-            text-align: center;
-        }
+      header {
+        background-color: #e6cba8;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .logo {
-            width: 146px;
-            height: 71px;
-        }
+      h1,
+      h2,
+      h3 {
+        text-align: center;
+      }
 
-        a {
-            color: #5E3023;
-            text-decoration: none;
-            margin-left: 10px;
-            margin-right: 10px;
-        }
+      .logo {
+        width: 146px;
+        height: 71px;
+      }
 
-        .botao {
-            color: #FFFDFD;
-            background-color: #FF8C00;
-            padding: 15px;
-            border-radius: 5px;
-        }
+      a {
+        color: #5e3023;
+        text-decoration: none;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
 
-        #cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            justify-items: center;
-            justify-content: center;
-            margin: 10px;
-        }
+      .botao {
+        color: #fffdfd;
+        background-color: #ff8c00;
+        padding: 15px;
+        border-radius: 5px;
+      }
 
-        .card {
+      #cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        justify-items: center;
+        justify-content: center;
+        margin: 10px;
+      }
 
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
-            transition: transform 0.2s;
-            width: 100%;
-        }
+      .card {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s;
+        width: 100%;
+      }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+      .card:hover {
+        transform: translateY(-5px);
+      }
 
+      .card p {
+        font-size: 14px;
+        color: #333;
+      }
 
-        .card p {
-            font-size: 14px;
-            color: #333;
-        }
+      .card > img {
+        display: block;
+        margin: 0 auto;
+        width: 10em;
+        height: 10em;
+        object-fit: contain;
+      }
 
-        .card>img {
-            display: block;
-            margin: 0 auto;
-            width: 10em;
-            height: 10em;
-            object-fit: contain;
-        }
+      #filtro {
+        display: flex;
 
-        #filtro {
-            display: flex;
+        padding: 1em 0em;
+        justify-items: center;
+        justify-content: center;
+        gap: 50em;
+      }
 
-            padding: 1em 0em;
-            justify-items: center;
-            justify-content: center;
-            gap: 50em;
-        }
+      #filtro > input {
+        width: 20em;
+        height: 2em;
+        border: none;
+        border-radius: 5px;
+        background-color: #d9d9d9;
+      }
 
-        #filtro>input {
-            width: 20em;
-            height: 2em;
-            border: none;
-            border-radius: 5px;
-            background-color: #D9D9D9;
-        }
+      #filtro > select {
+        border: none;
+        width: 10em;
+        border-radius: 5px;
+      }
 
-        #filtro>select {
-            border: none;
-            width: 10em;
-            border-radius: 5px;
-        }
+      #carrinho {
+        background-color: #5a2e15;
+        padding: 10px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
 
+      #carrinho > div > button {
+        float: right;
+        background-color: orange;
+        border: none;
+        border-radius: 3px;
+        height: 2em;
+      }
 
-        #carrinho {
-            background-color: #5a2e15;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+      #carrinho > div > strong {
+        color: #be8b8b;
+        padding: 10px;
+      }
 
-        }
+      #lista_carrinho {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        max-height: 200px;
+        /* altura máxima do carrinho */
+        overflow-y: auto;
+        /* ativa a rolagem vertical */
+      }
 
-        #carrinho>div>button {
-            float: right;
-            background-color: orange;
-            border: none;
-            border-radius: 3px;
-            height: 2em;
-        }
+      .card_carrinho {
+        background-color: #ccc;
+        padding: 1em;
+        margin: 10px;
+        width: 20em;
+        border-radius: 10px;
+      }
 
-        #carrinho>div>strong {
-            color: #be8b8b;
-            padding: 10px;
-        }
+      button {
+        float: left;
+        border-color: darkgray;
+        border-radius: 5px;
+        height: 2em;
+      }
 
-        #lista_carrinho {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            max-height: 200px;
-            /* altura máxima do carrinho */
-            overflow-y: auto;
-            /* ativa a rolagem vertical */
-        }
+      .botao {
+        color: #fffdfd;
+        background-color: #ff8c00;
+        padding: 15px;
+        border-radius: 5px;
+      }
 
-        .card_carrinho {
-            background-color: #ccc;
-            padding: 1em;
-            margin: 10px;
-            width: 20em;
-            border-radius: 10px;
-        }
+      footer {
+        background: #e6cba8;
+        padding: 20px;
+        text-align: center;
+      }
 
-        button {
-            float: left;
-            border-color: darkgray;
-            border-radius: 5px;
-            height: 2em;
-        }
+      footer ul {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0;
+        padding-bottom: 100px;
+      }
 
-        .botao {
-            color: #FFFDFD;
-            background-color: #FF8C00;
-            padding: 15px;
-            border-radius: 5px;
-        }
+      footer li {
+        cursor: pointer;
+      }
 
-        footer {
-            background: #E6CBA8;
-            padding: 20px;
-            text-align: center;
-        }
-
-        footer ul {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            list-style: none;
-            padding: 0;
-            margin: 10px 0 0;
-            padding-bottom: 100px;
-        }
-
-        footer li {
-            cursor: pointer;
-        }
-
-        #soma_carrinho {
-            color: orange;
-        }
+      #soma_carrinho {
+        color: orange;
+      }
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <div>
-            <a href="landing_page.html"><img class="logo" src="imagens/Logo_final.png" alt=""></a>
-        </div>
-        <div>
-            <a href="produtos.html">Carrinho</a>
-            <a href="landing_page.html">Sobre</a>
-            <a href="PaginaCadastro.html">Cadastrar</a>
-            <a href="PaginaLogin.html" class="botao">Entrar</a>
-        </div>
-        <div>
-            <p id="bomDia">teste</p>
-            <!-- Bom dia usuário código -->
-        </div>
+      <div>
+        <a href="landing_page.html"
+          ><img class="logo" src="imagens/Logo_final.png" alt=""
+        /></a>
+      </div>
+      <div>
+        <a href="produtos.html">Carrinho</a>
+        <a href="landing_page.html">Sobre</a>
+        <a href="PaginaCadastro.html">Cadastrar</a>
+        <a href="PaginaLogin.html" class="botao">Entrar</a>
+      </div>
+      <div>
+        <p id="bomDia">teste</p>
+        <!-- Bom dia usuário código -->
+      </div>
     </header>
 
     <h1>MONTE SEU CARRINHO</h1>
     <div id="filtro">
-        <input type="text" placeholder="pesquise por seus produtos!!">
-        <select name="categorias" id="cat" onchange='filtrar(this.value)'></select>
+      <input type="text" placeholder="pesquise por seus produtos!!" />
+      <select
+        name="categorias"
+        id="cat"
+        onchange="filtrar(this.value)"
+      ></select>
     </div>
 
     <div id="cards"></div>
 
     <div id="carrinho">
-        <div>
-            <strong>Cesta</strong><a id="soma_carrinho"></a>
-            <button><a href="compra.html">Finalizar compra</a></button>
-        </div>
+      <div>
+        <strong>Cesta</strong><a id="soma_carrinho"></a>
+        <button><a href="compra.html">Finalizar compra</a></button>
+      </div>
 
-        <div id="lista_carrinho"></div>
+      <div id="lista_carrinho"></div>
     </div>
     <footer>
-        <p>© 2025 DaRoça - Todos os direitos reservados</p>
-        <ul>
-            <li><a>Facebook></a></li>
-            <li>Instagram</li>
-            <li>WhatsApp</li>
-        </ul>
+      <p>© 2025 DaRoça - Todos os direitos reservados</p>
+      <ul>
+        <li><a>Facebook></a></li>
+        <li>Instagram</li>
+        <li>WhatsApp</li>
+      </ul>
     </footer>
     <script>
-        let url = "http://localhost:8090/produtos";
-        let url2 = "http://localhost:8090/categorias";
-        let totalCarrinho = 0;
-        let todosProdutos = [];
-        
-        fetch(url)
-            .then(resposta => resposta.json())
-            .then(data => {
-                console.log("Dados recebidos com sucesso")
-                todosProdutos = data
-                console.log(todosProdutos)
-                exibeDados(data)
-            })
-            .catch(erro => console.error("Erro ao buscar dados:", erro));
+      let url = "http://localhost:8090/produtos";
+      let url2 = "http://localhost:8090/categorias";
+      let totalCarrinho = 0;
+      let todosProdutos = [];
+      let carroItem = [];
 
-        fetch(url2)
-            .then(resposta => resposta.json())
-            .then(data => {
-                console.log("Dados recebidos com sucesso")
-                opcoes(data)
-            })
-            .catch(erro => console.error("Erro ao buscar dados:", erro));
+      fetch(url)
+        .then((resposta) => resposta.json())
+        .then((data) => {
+          console.log("Dados recebidos com sucesso");
+          todosProdutos = data;
 
-        function opcoes(dados) {
-            
-            let options = '<option value = 0>Todos</option>'; // opção para resetar filtro
-            dados.forEach(element => {
-                options += `<option value='${element.id}''>${element.nome}</option>`
-            });
-            document.querySelector('select').innerHTML = options
-        }
+          exibeDados(data);
+        })
+        .catch((erro) => console.error("Erro ao buscar dados:", erro));
 
-        function exibeDados(dados) {
-            let produtos = "";
-            for (let i = 0; i < dados.length; i++) {
-                produtos += `
-                    <div class="card">
+      fetch(url2)
+        .then((resposta) => resposta.json())
+        .then((data) => {
+          console.log("Dados recebidos com sucesso");
+          opcoes(data);
+        })
+        .catch((erro) => console.error("Erro ao buscar dados:", erro));
+
+      function opcoes(dados) {
+        let options = "<option value = 0>Todos</option>"; // opção para resetar filtro
+        dados.forEach((element) => {
+          options += `<option value='${element.id}''>${element.nome}</option>`;
+        });
+        document.querySelector("select").innerHTML = options;
+      }
+
+      function exibeDados(dados) {
+        let produtos = "";
+        for (let i = 0; i < dados.length; i++) {
+          produtos += `
+                    <div class="card" >
                         <img src="${dados[i].imagem}">
                         <h4>${dados[i].nome}</h4>
                         <p>${dados[i].descricao}</p>
                         <p>Valor: ${dados[i].valor} R$</p>
                         <p>Unidade: ${dados[i].unidade}</p>
-                        <button onclick="addCarrinho('${dados[i].nome}', ${dados[i].valor})">Add a cesta</button>
+                        <button id="btn_${dados[i].nome}" onclick="addCarrinho('${dados[i].nome}', ${dados[i].valor}, this)">Add a cesta</button>
                     </div>
-                `;//add <p>categoria, add <p>unidade, add <p>descrição 
-            }
-            document.getElementById("cards").innerHTML = produtos;
+                `; //add <p>categoria, add <p>unidade, add <p>descrição
         }
+        document.getElementById("cards").innerHTML = produtos;
+      }
 
-        let itemId = 0
-        function addCarrinho(nome, valor) {
-            itemId++
-            const id = `item_${itemId}`
-            
-            lista = `
+      let itemId = 0;
+      function addCarrinho(nome, valor, botao) {
+        itemId++;
+        const id = `item_${itemId}`;
+
+        lista = `
                 <div class="card_carrinho" id='${id}'>
-                    <p>${nome} - R$ ${valor.toFixed(2)} -- <span class="qtd">1</span>x</p>
+                    <p>${nome} - R$ ${valor.toFixed(
+          2
+        )} -- <span class="qtd">1</span>x</p>
                     <button onclick="add('${id}', ${valor})">+</button>
-                    <button onclick="sub('${id}', ${valor})">-</button>
-                    <button onclick="removerDaLista('${id}', ${valor})">remover</button>
+                    <button onclick="sub('${id}', ${valor}, '${nome}')">-</button>
+                    <button onclick="removerDaLista('${id}', ${valor}, '${nome}')">remover</button>
                 </div>
             `;
-            document.getElementById("lista_carrinho").innerHTML += lista;
-            preco_carrinho_add(valor)
+        document.getElementById("lista_carrinho").innerHTML += lista;
+        preco_carrinho_add(valor);
+
+        botao.disabled = true;
+        botao.innerHTML = "Adicionado!";
+        botao.style.backgroundColor = "gray";
+      }
+
+      function add(id, valor) {
+        let qtdSpan = document.getElementById(id).querySelector(".qtd");
+        let qtd = parseInt(qtdSpan.innerText) || 0;
+        qtd++;
+        qtdSpan.innerText = qtd;
+        preco_carrinho_add(valor);
+      }
+
+      function sub(id, valor, nome) {
+        let qtdSpan = document.getElementById(id).querySelector(".qtd");
+        let qtd = parseInt(qtdSpan.innerText) || 0; //Do java pega um tipo de dado e tenta transformar em inteiro, se nao conseguir transforma em 0
+        qtd--;
+        if (qtd <= 0) {
+          removerDaLista(id, valor, nome);
+        } else {
+          qtdSpan.innerText = qtd;
+          preco_carrinho_subtract(valor);
         }
+      }
 
-        function add(id, valor){
-            let qtdSpan = document.getElementById(id).querySelector(".qtd");
-            let qtd = parseInt(qtdSpan.innerText) || 0;
-            qtd++;
-            qtdSpan.innerText = qtd;
-            preco_carrinho_add(valor);
+      function removerDaLista(id, valor, nome) {
+        let qtdSpan = document.getElementById(id).querySelector(".qtd");
+        let qtd = parseInt(qtdSpan.innerText) || 1;
+        document.getElementById(id).remove();
+        preco_carrinho_subtract(valor * qtd);
+
+        const botao = document.getElementById(`btn_${nome}`);
+        botao.disabled = false;
+        botao.innerText = "Add a cesta";
+        botao.style.backgroundColor = "";
+      }
+
+      function filtrar(value) {
+        //console.log(value)
+        if (value == 0) {
+          exibeDados(todosProdutos);
+        } else {
+          const url = `http://localhost:8090/filtrar/${value}`;
+          fetch(url)
+            .then((resposta) => resposta.json())
+            .then((data) => {
+              console.log("Dados recebidos com sucesso");
+
+              exibeDados(data);
+            });
         }
+      }
 
-        function sub(id, valor){
-            let qtdSpan = document.getElementById(id).querySelector(".qtd");
-            let qtd = parseInt(qtdSpan.innerText) || 0; //Do java pega um tipo de dado e tenta transformar em inteiro, se nao conseguir transforma em 0 
-            qtd--;
-            if (qtd <= 0){
-                removerDaLista(id, valor)
-            } else {
-                qtdSpan.innerText = qtd;
-                preco_carrinho_subtract(valor);
-            }
-        }
+      function preco_carrinho_add(valor) {
+        totalCarrinho += valor;
+        document.getElementById(
+          "soma_carrinho"
+        ).innerText = `Total: R$ ${totalCarrinho.toFixed(2)}`;
+      }
 
-        function removerDaLista(id, valor) {
-            let qtdSpan = document.getElementById(id).querySelector(".qtd");
-            let qtd = parseInt(qtdSpan.innerText) || 1;
-            document.getElementById(id).remove();
-            preco_carrinho_subtract(valor * qtd);
-        }
+      function preco_carrinho_subtract(valor) {
+        totalCarrinho -= valor;
+        if (totalCarrinho < 0) totalCarrinho = -totalCarrinho;
+        document.getElementById(
+          "soma_carrinho"
+        ).innerText = `Total: R$ ${totalCarrinho.toFixed(2)}`;
+      }
 
-        function filtrar(value) {
-            //console.log(value)
-            if (value == 0) {
-                exibeDados(todosProdutos)
-            }
-            else{
-                const url = `http://localhost:8090/filtrar/${value}`
-                fetch(url)
-                    .then(resposta => resposta.json())
-                    .then(data => {
-                        console.log("Dados recebidos com sucesso")
-                        console.log(data)
-                        exibeDados(data)
-                })  
-            }
-            
-        
-            
-            
-
-        }
-
-        function preco_carrinho_add(valor) {
-            totalCarrinho += valor;
-            document.getElementById("soma_carrinho").innerText =
-                `Total: R$ ${totalCarrinho.toFixed(2)}`;
-        }
-
-        function preco_carrinho_subtract(valor) {
-            totalCarrinho -= valor;
-            document.getElementById("soma_carrinho").innerText =
-                `Total: R$ ${totalCarrinho.toFixed(2)}`;
-        }
-
-
-        document.querySelector("#filtro input").addEventListener("input", (e) => {
-            const termo = e.target.value.toLowerCase();
-            const filtrados = todosProdutos.filter(p => 
-                p.nome.toLowerCase().includes(termo) || 
-                p.descricao.toLowerCase().includes(termo));
-            exibeDados(filtrados);
-        });
-        
+      document.querySelector("#filtro input").addEventListener("input", (e) => {
+        const termo = e.target.value.toLowerCase();
+        const filtrados = todosProdutos.filter(
+          (p) =>
+            p.nome.toLowerCase().includes(termo) ||
+            p.descricao.toLowerCase().includes(termo)
+        );
+        exibeDados(filtrados);
+      });
     </script>
-
-</body>
-
+  </body>
 </html>
