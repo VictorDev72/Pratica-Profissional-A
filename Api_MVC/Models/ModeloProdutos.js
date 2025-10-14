@@ -1,4 +1,5 @@
-const { mssql } = require("../Config/db");
+const { Request, Int } = require("mssql");
+const { mssql } = require("../config/db");
 
 async function listarProdutos() {
     const produtos = await mssql.query('SELECT * FROM daroca.produtos')
@@ -11,8 +12,16 @@ async function listarCategorias() {
 }
 
 async function filtrar(value) {
-    const produtos = await mssql.query(`SELECT * FROM daroca.produtos WHERE categoria = ${value}`);
-    return produtos.recordset;
+    const produtos = await mssql.query(`SELECT * FROM daroca.produtos WHERE categoria = @value`);
+
+    try{
+        const request = new mssql.Request()
+
+        request.input('value', mssql.Int, value)
+        return produtos.recordset;
+    }catch(error){
+        alert("Deletaram a tabela Volte depois :D")
+    }
 }
 
 module.exports = { listarProdutos, listarCategorias, filtrar};
