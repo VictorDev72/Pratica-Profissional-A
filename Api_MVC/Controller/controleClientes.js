@@ -29,7 +29,7 @@ async function login(req, res) {
         if (!senhaValida) return res.status(401).json({ msg: "Credenciais inválidas" });
 
         const token = jwt.sign({ id: cliente.id, email: cliente.email, role: cliente.role }, SECRET, { expiresIn: "2h" });
-        res.json({ token });
+        res.json({ token , cliente});
     } catch (err) {
         res.status(500).json({ erro: err.message });
     }
@@ -37,3 +37,4 @@ async function login(req, res) {
 }
 
 module.exports = {cadastrado, login}
+
