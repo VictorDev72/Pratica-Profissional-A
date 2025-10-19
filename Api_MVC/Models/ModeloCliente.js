@@ -27,12 +27,12 @@ async function cadastroCliente(cliente) {
         request.input('numero', mssql.VarChar(6), numero)
         request.input('complemento', mssql.VarChar(20), complemento)
         request.input('cep', mssql.VarChar(8), cep)
-        request.input('senha', mssql.VarChar(MAX), senha)
+        request.input('senha', mssql.VarChar(MAX), senhaHash)
 
         await request.query(query)
 
     } catch (error) {
-        alert("Insira os dados de forma correta!!")
+        console.error("Erro na inscerção dos dados: " + error.message);
     }
     //console.log(cliente)
     
@@ -43,8 +43,16 @@ async function cadastroCliente(cliente) {
 }
 
 async function buscar(email) {
-    const result = await mssql.query(`SELECT * FROM daroca.cliente WHERE email ='${email}'`);
-    return result.recordset[0];
+    try{
+        let query = `SELECT * FROM daroca.cliente WHERE email = @email`;
+        const request = new mssql.Request();
+        request.input("email", mssql.VarChar(50), email);
+        const result = await request.query(query);
+        return result.recordset[0]; 
+    }catch(error){
+        console.error("Erro na busca dos dados: " + error.message);
+    }
+    
 }
 
 //async function loginCliente(registro) {
@@ -53,4 +61,4 @@ async function buscar(email) {
 //    return {mensagem: "Login realizado com exito"}
 //}
 
-module.exports = {cadastroCliente, buscar,} //loginCliente
+module.exports = {cadastroCliente, buscar} //loginCliente
