@@ -485,5 +485,16 @@
       <li><a>Instagram</a></li>
     </ul>
   </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const saudacao = document.getElementById("bemvindo");
+      const user = JSON.parse(localStorage.getItem("user"));
+    
+      if (user) {
+        saudacao.hidden = false;
+        saudacao.innerHTML = `Bem-vindo(a), ${user.prenome}!`;
+      }
+    });
+  </script>
 </body>
 </html>
