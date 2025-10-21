@@ -7,12 +7,13 @@ const { MAX } = require("mssql");
 async function cadastroCliente(cliente) {
     const {prenome, sobrenome, nascimento, email,celular, cpf, tipo, logradouro, numero, complemento, cep, senha} = cliente
 
+    if (!senha) throw new Error("Senha não fornecida");
+
     const senhaHash = await bcrypt.hash(senha, 10);
 
-    
     try {
         let query = `insert into daroca.cliente (prenome, sobrenome, nascimento, email, celular , cpf, tipo, logradouro, numero, complemento, cep, senha)
-        VALUES (@prenome, @sobrenome, @nascimento, @email, @celular, @cpf, @tipo, @logradouro, @numero, @complemento, @cep, @senhaHash)`
+        VALUES (@prenome, @sobrenome, @nascimento, @email, @celular, @cpf, @tipo, @logradouro, @numero, @complemento, @cep, @senha)`
 
         const request = new mssql.Request();
 
@@ -27,17 +28,15 @@ async function cadastroCliente(cliente) {
         request.input('numero', mssql.VarChar(6), numero)
         request.input('complemento', mssql.VarChar(20), complemento)
         request.input('cep', mssql.VarChar(8), cep)
-        request.input('senha', mssql.VarChar(MAX), senhaHash)
+        request.input('senha', mssql.VarChar(mssql.MAX), senhaHash)
 
         await request.query(query)
 
     } catch (error) {
         console.error("Erro na inscerção dos dados: " + error.message);
+        throw error;
     }
-    //console.log(cliente)
-    
 
-    if (!senha) throw new Error("Senha não fornecida");
     return {mensagem: "Cadastro realizado com exito"}
 
 }
