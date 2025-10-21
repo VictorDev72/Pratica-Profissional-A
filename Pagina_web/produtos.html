@@ -298,22 +298,29 @@
       }
 
       let itemId = 0;
+      let carrinho = [];
+
+      function atualizarStorageCarrinho() {
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+      }
+
       function addCarrinho(nome, valor, botao) {
         itemId++;
         const id = `item_${itemId}`;
-
         lista = `
-                <div class="card_carrinho" id='${id}'>
-                    <p>${nome} - R$ ${valor.toFixed(
-          2
-        )} -- <span class="qtd">1</span>x</p>
-                    <button onclick="add('${id}', ${valor})">+</button>
-                    <button onclick="sub('${id}', ${valor}, '${nome}')">-</button>
-                    <button onclick="removerDaLista('${id}', ${valor}, '${nome}')">remover</button>
-                </div>
-            `;
+    <div class="card_carrinho" id='${id}'>
+      <p>${nome} - R$ ${valor.toFixed(2)} -- <span class="qtd">1</span>x</p>
+      <button onclick="add('${id}', ${valor})">+</button>
+      <button onclick="sub('${id}', ${valor}, '${nome}')">-</button>
+      <button onclick="removerDaLista('${id}', ${valor}, '${nome}')">remover</button>
+    </div>
+  `;
         document.getElementById("lista_carrinho").innerHTML += lista;
         preco_carrinho_add(valor);
+
+        // Adiciona ao array do carrinho
+        carrinho.push({ nome, valor, qtd: 1, id });
+        atualizarStorageCarrinho();
 
         botao.disabled = true;
         botao.innerHTML = "Adicionado!";
@@ -326,17 +333,26 @@
         qtd++;
         qtdSpan.innerText = qtd;
         preco_carrinho_add(valor);
+
+        // Atualiza quantidade no array do carrinho
+        let item = carrinho.find((el) => el.id === id);
+        if (item) item.qtd = qtd;
+        atualizarStorageCarrinho();
       }
 
       function sub(id, valor, nome) {
         let qtdSpan = document.getElementById(id).querySelector(".qtd");
-        let qtd = parseInt(qtdSpan.innerText) || 0; //Do java pega um tipo de dado e tenta transformar em inteiro, se nao conseguir transforma em 0
+        let qtd = parseInt(qtdSpan.innerText) || 0;
         qtd--;
         if (qtd <= 0) {
           removerDaLista(id, valor, nome);
         } else {
           qtdSpan.innerText = qtd;
           preco_carrinho_subtract(valor);
+          // Atualiza quantidade no array do carrinho
+          let item = carrinho.find((el) => el.id === id);
+          if (item) item.qtd = qtd;
+          atualizarStorageCarrinho();
         }
       }
 
@@ -345,6 +361,10 @@
         let qtd = parseInt(qtdSpan.innerText) || 1;
         document.getElementById(id).remove();
         preco_carrinho_subtract(valor * qtd);
+
+        // Remove do array do carrinho
+        carrinho = carrinho.filter((el) => el.id !== id);
+        atualizarStorageCarrinho();
 
         const botao = document.getElementById(`btn_${nome}`);
         botao.disabled = false;
