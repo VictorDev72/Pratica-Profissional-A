@@ -168,10 +168,6 @@
       <a href="PaginaCadastro.html">Cadastrar</a>
       <a href="PaginaLogin.html" class="botao">Entrar</a>
     </div>
-    <div>
-      <a href="">teste</a>
-      <!-- Bom dia usuário código -->
-    </div>
   </header>
   <section style="display: flex; gap: 40px; justify-content: center; align-items: flex-start;">
     <form style="flex: 1; min-width: 350px;">
@@ -275,6 +271,23 @@
     document.getElementById("total-carrinho-aside").innerText = `R$ ${total.toFixed(2)}`;
     document.getElementById("valor-total-carrinho").innerText = `R$ ${total.toFixed(2)}`;
   });
+
+      document.addEventListener("DOMContentLoaded", () => {
+      const token = localStorage.getItem("token");
+      
+      if  (token){
+        const botao = document.querySelector(".botao");
+        botao.innerHTML = "Sair";
+        botao.href = "landing_page.html";
+        botao.onclick = () => {
+          if(confirm("Deseja realmente sair?")){
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            window.location.reload();
+          }
+        }
+      }
+    });
 </script>
 
 </html>
