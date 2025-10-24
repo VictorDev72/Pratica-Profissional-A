@@ -362,7 +362,7 @@
     </div>
 
     <div>
-        <a id="bemvindo" hidden>teste</a>
+        <a id="bemvindo" hidden></a>
         <!-- Bom dia usuário código -->
     </div>
   </header>
@@ -494,7 +494,21 @@
     document.addEventListener("DOMContentLoaded", () => {
       const saudacao = document.getElementById("bemvindo");
       const user = JSON.parse(localStorage.getItem("user"));
-    
+      const token = localStorage.getItem("token");
+      
+      if  (token){
+        const botao = document.querySelector(".botao");
+        botao.innerHTML = "Sair";
+        botao.href = "#";
+        botao.onclick = () => {
+          if(confirm("Deseja realmente sair?")){
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            window.location.reload();
+          }
+          
+        }
+      }
       if (user) {
         saudacao.hidden = false;
         saudacao.innerHTML = `Bem-vindo(a), ${user.prenome}!`;
