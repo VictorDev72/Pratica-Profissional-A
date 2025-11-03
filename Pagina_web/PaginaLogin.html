@@ -230,9 +230,19 @@
               console.error("Erro:", error);
             });
             */
+          }
 
-
-           
+          if  (token){
+            const botao = document.querySelector(".botao");
+            botao.innerHTML = "Sair";
+            botao.href = "landing_page.html";
+            botao.onclick = () => {
+              if(confirm("Deseja realmente sair?")){
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                window.location.reload();
+              }
+            }
           }
     </script>
   </body>
