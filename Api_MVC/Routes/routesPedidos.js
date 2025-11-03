@@ -3,5 +3,6 @@ const router = express.Router();
 const controlePedidos = require("../Controller/controlePedidos.js");
 
 router.post("/venda", controlePedidos.criarPedido);
+router.get("/venda/:id", controlePedidos.getPedidoPorId)
 
 module.exports = router;
