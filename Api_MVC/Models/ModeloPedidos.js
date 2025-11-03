@@ -25,5 +25,22 @@ async function cadastroPedido(pedido) {
     }
 }
 
-
-module.exports = {cadastroPedido}
+async function getPedidoPorId(id){
+    try{
+        const query = " SELECT * FROM daroca.Venda WHERE idCliente = @id"
+        const request = new mssql.Request();
+    
+        request.input('id', mssql.Int, id);
+    
+        result = await request.query(query);
+        if (!result){
+            return {mensagem: "Usuario nao tem pedidos"}
+        }else{
+            return result;   
+        }
+    }catch(erro){
+        console.error("Erro na busca de dados: "+ erro.message);
+        throw erro;
+    } 
+}
+module.exports = {cadastroPedido, getPedidoPorId}
