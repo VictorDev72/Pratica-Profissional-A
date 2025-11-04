@@ -1,10 +1,11 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const { conectaBD } = require("./Config/db");
+const { conectaBD } = require("./config/db");
 const routesClientes = require("./Routes/routesClientes");
 const routesProdutos = require("./Routes/routesProdutos");
 const routesPedidos = require("./Routes/routesPedidos");
+const routesAval = require("./Routes/routesAvaliacoes");
 
 const app = express();
 const porta = process.env.PORTA || 8090;
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/", routesClientes);
 app.use("/", routesProdutos);
 app.use("/", routesPedidos);
+app.use("/", routesAval);
 
 // Rota principal
 app.get("/", (req, res) => {
@@ -26,4 +28,3 @@ app.get("/", (req, res) => {
 // Inicia BD e servidor
 conectaBD();
 app.listen(porta, () => console.log(`API em execução na porta ${porta}`));
-
