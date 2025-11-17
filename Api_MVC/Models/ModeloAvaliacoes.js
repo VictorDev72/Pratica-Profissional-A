@@ -38,4 +38,10 @@ async function getAvalId(id) {
     }
 }
 
-module.exports = {postAval, getAvalId}
+async function get50Aval() {
+    const query = " SELECT top 50 FROM daroca.Avaliacao join daroca.Cliente on avaliacao.idCliente = cliente.idCliente ORDER BY avaliacao.nota DESC"
+    result = await mssql.query(query);
+    return result;
+}
+
+module.exports = {postAval, getAvalId, get50Aval}
