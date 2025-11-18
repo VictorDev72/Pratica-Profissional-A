@@ -1,4 +1,4 @@
-const modAval = require('../Model/ModeloAvaliacoes');
+const modAval = require('../Models/ModeloAvaliacoes');
 
 async function criarAval(req, res) {
     try{
@@ -31,3 +31,4 @@ async function get50Aval(req,res) {
 }
 
 module.exports = {criarAval, getAvalPorId, get50Aval}
+
