@@ -3,7 +3,11 @@ const modAval = require('../Models/ModeloAvaliacoes');
 async function criarAval(req, res) {
     try{
         const aval = req.body;
-        const resultado = await modAval.PostAval(aval);
+        // Validação básica
+        if (!aval || !aval.idCliente || !aval.texto || typeof aval.nota === 'undefined') {
+            return res.status(400).json({error: "Dados de avaliação inválidos"});
+        }
+        const resultado = await modAval.postAval(aval);
         res.status(201).json(resultado);
     }catch(error){
         res.status(400).json({error:"erro na criação de um pedido", error})
@@ -31,4 +35,3 @@ async function get50Aval(req,res) {
 }
 
 module.exports = {criarAval, getAvalPorId, get50Aval}
-
