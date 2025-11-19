@@ -1,26 +1,29 @@
-const { Request, Int } = require("mssql");
 const { mssql } = require("../config/db");
+const stringSQL = process.env.CONNECTION_STRING;
 
 async function listarProdutos() {
-    const produtos = await mssql.query('SELECT * FROM daroca.produtos')
+    await mssql.connect(stringSQL);
+    const produtos = await mssql.query('SELECT * FROM daroca.produtos');
     return produtos.recordset;
 }
 
 async function listarCategorias() {
-    const categorias = await mssql.query('SELECT * FROM daroca.categorias')
+    await mssql.connect(stringSQL);
+    const categorias = await mssql.query('SELECT * FROM daroca.categorias');
     return categorias.recordset;
 }
 
 async function filtrar(value) {
-    const produtos = await mssql.query(`SELECT * FROM daroca.produtos WHERE categoria = @value`);
-
+    let query = `SELECT * FROM daroca.produtos WHERE categoria = @value`;
     try{
-        const request = new mssql.Request()
-
-        request.input('value', mssql.Int, value)
+        await mssql.connect(stringSQL);
+        const request = new mssql.Request();
+        request.input('value', mssql.Int, value);
+        const produtos = await request.query(query);
         return produtos.recordset;
     }catch(error){
-        alert("Deletaram a tabela Volte depois :D")
+        console.error("Erro na busca de dados: " + error.message);
+        throw error;
     }
 }
 
