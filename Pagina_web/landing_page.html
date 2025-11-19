@@ -412,6 +412,29 @@
       }
     }
 
+
+    /* nota */
+    #nota {
+      width: 100%;
+      margin: 8px 0;
+      accent-color: var(--accent); /* cor personalizada para navegadores modernos */
+      height: 6px;
+      background: #ffe5c2;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    #notap {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin-top: 4px;
+      margin-bottom: 8px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+
     /* acessibilidade */
     a:focus,
     button:focus,
@@ -487,7 +510,7 @@
 
     <div class="sobre" id="sobre">
       <div class="sobre-img">
-        <img src="imagens/natalia.jpg" alt="">
+        <img src="#" alt="">
       </div>
       <div class="sobre-explica">
         <h1>Sobre</h1>
@@ -505,17 +528,18 @@
           <div class="linha-formulario">
             <div class="coluna-formulario">
               <label for="nome">Nome</label>
-              <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+              <input type="text" id="nome" name="nome" placeholder="nome" disabled>
             </div>
             <div class="coluna-formulario">
               <label for="sobrenome">Sobrenome</label>
-              <input type="text" id="sobrenome" name="sobrenome" placeholder="Digite seu sobrenome">
+              <input type="text" id="sobrenome" name="sobrenome" placeholder="sobrenome" disabled>
             </div>
           </div>
 
           <div class="coluna-formulario">
-            <label for="email">Endereço de e-mail</label>
-            <input type="email" id="email" name="email" placeholder="Digite seu e-mail">
+            <label for="email">Nota</label>
+            <input type="range" min="0" max="11" step="1" id="nota" name="nota">
+            <p id="notap"></p>
           </div>
 
           <div class="coluna-formulario">
@@ -524,8 +548,9 @@
           </div>
 
           <div id="botao-form">
-            <button type="submit">Enviar</button>
+            <button type="button" onclick="postarAval()">Enviar</button>
           </div>
+          <p id="resp" style="color:red; font-size:large;"></p>
         </form>
       </div>
 
@@ -534,7 +559,7 @@
         <div class="card-avaliacao">
           <p>"Produtos sempre fresquinhos e entrega super pontual!"</p>
           <div class="card-usuario">
-            <img src="imagens/perfil.png" alt="">
+            <img src="#" alt="">
             <div class="card-info-usuario">
               <p>Rafael</p>
               <p>Cliente há 2 anos</p>
@@ -544,7 +569,7 @@
         <div class="card-avaliacao">
           <p>"A DaRoça transformou minha rotina: produtos impecáveis e atendimento excelente!"</p>
           <div class="card-usuario">
-            <img src="imagens/perfil.png" alt="">
+            <img src="#" alt="">
             <div class="card-info-usuario">
               <p>Gabriel</p>
               <p>Cliente há 4 meses</p>
@@ -554,7 +579,7 @@
         <div class="card-avaliacao">
           <p>"Excelente atendimento e qualidade, recomendo demais a DaRoça!"</p>
           <div class="card-usuario">
-            <img src="imagens/perfil.png" alt="">
+            <img src="#" alt="">
             <div class="card-info-usuario">
               <p>Victor</p>
               <p>Cliente a 8 meses</p>
@@ -596,32 +621,36 @@
       if (user) {
         saudacao.hidden = false;
         saudacao.innerHTML = `Bem-vindo(a), ${user.prenome || "Usuário"}!`;
+        document.getElementById("nome").value = user.prenome;
+        document.getElementById("sobrenome").value = user.sobrenome;
       }
     
       if (boxaval) boxaval.innerHTML = "<p>Carregando avaliações...</p>";
       try{
-        const res = fetch(url);
-        if(!res.ok) throw new Error(`Resposta do servidor: ${res.status}`);
+        const res = await fetch(url);
+        if(!res.ok) {
+          console.log("erro na busca")
+        }
         const data = await res.json();
 
-        if(data.length === 0){
+        if(data.recordset.length === 0){
           boxaval.innerHTML = "<p>Nenhuma avaliação encontrada.</p>";
           return;
         }
         let avaliacoes = '';
-        data.forEach(element => {
+        data.recordset.forEach(element => {
           avaliacoes += `
           <div class="card-avaliacao">
             <p>"${element.texto}"</p>
             <div class="card-usuario">
-              <img src="${element.img}" alt="imagens/perfil.png">
+              <img src="#" alt="#">
               <div class="card-info-usuario">
                 <p>${element.prenome + ' ' + element.sobrenome}</p>
-                <p>${element.nota}</p>
+                <p>Nota: ${element.nota}</p>
               </div>
             </div>
           </div>
-          `
+          `// colocar a imagem no banco de dados img => ${element.img}
         });
         boxaval.innerHTML = avaliacoes;
       }catch(err){
@@ -630,7 +659,54 @@
       }
     });
 
+    document.getElementById("nota").addEventListener("input", () => {
+    document.getElementById("notap").innerHTML = document.getElementById("nota").value;
+    });
 
+    async function postarAval(){
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+      console.log(user)
+      const texto = document.getElementById("mensagem").value;
+      console.log(texto)
+      const nota = document.getElementById("nota").value;
+      console.log(nota)
+      const resp = document.getElementById("resp")
+      if (user === null){
+        resp.innerHTML = "Cadastre-se/logue para fazer uma avaliação"
+      }else{
+        const idcli = user.idCliente
+        console.log(idcli)
+        const options = {
+          method: "POST",
+          body: JSON.stringify({
+            idCliente: Number(idcli),
+            texto: texto,
+            nota: Number(nota)
+          }),
+          headers: { 'Content-type': 'application/json' },
+        }
+        try {
+          const result = await fetch("http://localhost:8090/postavaliacao", options);
+          const dados = await result.json();
+          console.log(dados);
+
+          if (result.ok) {
+            console.log("sucesso na avaliação");
+            resp.innerHTML = ('Obrigado por sua avaliação!');
+            resp.style.color = 'green';
+          } else {
+            console.log("Erro de avaliação não valida ");
+            resp.innerHTML = ('Erro de cadastro não valido');
+            resp.style.color = 'red';
+          }
+        } catch (error) {
+          console.error("Erro na inserção", error.message);
+          resp.innerHTML = ("Erro na inserção");
+          resp.style.color = 'red';
+        }
+      }
+      
+    }
 
 
   </script>
