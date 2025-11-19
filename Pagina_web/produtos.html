@@ -4,38 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Produtos</title>
-    <script
-      src=" https://kit.fontawesome.com/7d8c9004fe.js "
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="style.css">
     <style>
-      :root {
-        --primary-color: #ffefda;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
       body {
-        margin: 0;
         font-family: Arial, sans-serif;
-        background-color: var(--primary-color);
-        color: #5e3023;
+        margin: 0;
+        padding: 0;
       }
-
       header {
-        background-color: #e6cba8;
         width: 100%;
         height: 100px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
       }
 
-      h1,
-      h2,
-      h3 {
+      h1{
         text-align: center;
       }
 
@@ -58,13 +39,30 @@
         border-radius: 5px;
       }
 
+      #filtro {
+        margin: 0px 10px 20px 10px;
+        display: flex;
+        gap: 2em;
+      }
+
+      #produtos-area {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.08);
+        padding: 20px;
+      }
+
       #cards {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
         justify-items: center;
-        justify-content: center;
-        margin: 10px;
+        margin: 10px 0;
+        max-height: 60vh;
+        overflow-y: auto;
       }
 
       .card {
@@ -74,6 +72,7 @@
         box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
         transition: transform 0.2s;
         width: 100%;
+        max-width: 350px;
       }
 
       .card:hover {
@@ -86,43 +85,22 @@
       }
 
       .card > img {
-        display: block;
-        margin: 0 auto;
-        width: 10em;
+        width: 100%;
         height: 10em;
-        object-fit: contain;
-      }
-
-      #filtro {
-        display: flex;
-
-        padding: 1em 0em;
-        justify-items: center;
-        justify-content: center;
-        gap: 50em;
-      }
-
-      #filtro > input {
-        width: 20em;
-        height: 2em;
-        border: none;
-        border-radius: 5px;
-        background-color: #d9d9d9;
-      }
-
-      #filtro > select {
-        border: none;
-        width: 10em;
-        border-radius: 5px;
+        object-fit: cover; 
+        margin: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
       }
 
       #carrinho {
-        background-color: #5a2e15;
-        padding: 10px;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        background-color: #a33333;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 3px 8px rgba(0,0,0,0.08);
+        color: #fff;
+        margin: 30px auto 0 auto;
+        max-width: 100vh;
       }
 
       #carrinho > div > button {
@@ -134,26 +112,53 @@
       }
 
       #carrinho > div > strong {
-        color: #be8b8b;
+        color: #fff;
         padding: 10px;
       }
 
       #lista_carrinho {
         display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        max-height: 200px;
-        /* altura máxima do carrinho */
+        flex-direction: column;
+        gap: 18px;
+        max-height: 320px;
         overflow-y: auto;
-        /* ativa a rolagem vertical */
+        padding: 10px 0 10px 0;
       }
 
       .card_carrinho {
-        background-color: #ccc;
-        padding: 1em;
-        margin: 10px;
-        width: 20em;
+        background-color: #f7f3ee;
+        color: #222;
+        padding: 0.7em 1em;
+        margin: 0;
+        width: 100%;
         border-radius: 10px;
+        box-shadow: 0px 2px 6px rgba(0,0,0,0.07);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+      .card_carrinho p {
+        margin: 0;
+        flex: 1;
+        font-size: 15px;
+        font-weight: 500;
+      }
+      .card_carrinho button {
+        float: none;
+        margin-left: 5px;
+        background: #ff8c00;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 0 10px;
+        height: 2em;
+        font-size: 1em;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .card_carrinho button:hover {
+        background: #e67600;
       }
 
       button {
@@ -174,6 +179,7 @@
         background: #e6cba8;
         padding: 20px;
         text-align: center;
+        margin-top: 40px;
       }
 
       footer ul {
@@ -196,6 +202,18 @@
       button:disabled {
         opacity: 0.6;
         cursor: not-allowed;
+      }
+      @media (max-width: 900px) {
+        #produtos-area {
+          padding: 10px;
+        }
+        #cards {
+          max-height: 40vh;
+        }
+        #carrinho {
+          max-width: 100%;
+          margin-top: 20px;
+        }
       }
     </style>
   </head>
@@ -224,8 +242,9 @@
         onchange="filtrar(this.value)"
       ></select>
     </div>
-
-    <div id="cards"></div>
+    <div id="produtos-area">
+      <div id="cards"></div>
+    </div>
 
     <div id="carrinho">
       <div>
@@ -409,6 +428,8 @@
         exibeDados(filtrados);
       });
 
+
+      const token = localStorage.getItem("token");
       if  (token){
         const botao = document.querySelector(".botao");
         botao.innerHTML = "Sair";
@@ -424,4 +445,3 @@
     </script>
   </body>
 </html>
-
