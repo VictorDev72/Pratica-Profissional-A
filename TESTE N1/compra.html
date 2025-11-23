@@ -381,7 +381,7 @@
         VALOR TOTAL: <span id="valor-total-carrinho">R$ 0,00</span>
       </div>
 
-      <button class="botaofin" >FINALIZAR AGORA</button>
+      <button onclick="criarPedido()" class="botaofin" >FINALIZAR AGORA</button>
     </form>
     <aside id="carrinho-compra" style="flex: 1; min-width: 300px;">
       <h2>Seu Carrinho</h2>
@@ -399,16 +399,20 @@
   </footer>
 </body>
 <script>
+  /*Side Bar*/
+  const menuButton = document.querySelector('.menu-button');
+  const sidebar = document.querySelector('.sidebar');
+
   document.addEventListener("DOMContentLoaded", () => {
     // Preenchimento automático dos campos do formulário com dados do usuário
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user")|| "null");
     if (user) {
       if (user.prenome) document.getElementById("nome").value = user.prenome;
       if (user.email) document.getElementById("email").value = user.email;
       if (user.celular) document.getElementById("celular").value = user.celular;
       if (user.cpf) document.getElementById("cpf").value = user.cpf;
 
-      exibePedidosDoUser(user.id);
+      exibePedidosDoUser(user.idCliente);
       document.getElementById("nome").value = user.prenome + " " + user.sobrenome;
       document.getElementById("email").value = user.email;
       document.getElementById("celular").value = user.celular;
@@ -438,10 +442,8 @@
     document.getElementById("total-carrinho-aside").value = total.toFixed(2)
     document.getElementById("valor-total-carrinho").innerText = `R$ ${total.toFixed(2)}`;
     document.getElementById("valor-total-carrinho").value = total.toFixed(2)
-  });
 
-  /*Logout*/
-  document.addEventListener("DOMContentLoaded", () => {
+/*Logout*/
     const token = localStorage.getItem("token");
     
     if  (token){
@@ -464,9 +466,6 @@
   });
 
 
-  /*Side Bar*/
-  const menuButton = document.querySelector('.menu-button');
-  const sidebar = document.querySelector('.sidebar');
 
   menuButton.addEventListener('click', () => {
     console.log('toggle')
@@ -476,24 +475,23 @@
   });
 
   async function exibePedidosDoUser(id) {
-    let pedidos;  
+    let pedidos = [];  
     let cardsPedidos = "";
-    let url = `http://localhost/venda/${id}`
+    let url = `http://localhost:8090/venda/${id}`
     try{
       sidebar.innerHTML = "<p>Carregando pedidos.</p>";
         await fetch(url)
           .then(res => res.json())
+          .then(data => pedidos = data)
           .then(dados => console.log(dados))
-          .then(result => pedidos = result)
           .catch(err => console.error('Erro ao buscar pedidos:', err));
-        console.log(pedidos);
         if (!pedidos || pedidos.length === 0) {
           sidebar.innerHTML = "<p>Nenhum pedido encontrado.</p>";
           return;
         }
         pedidos.forEach(pedido => {
           cardsPedidos += `
-            <div >
+            <div>
               <strong>Pedido ID: ${pedido.id}</strong><br>
               Data: ${new Date(pedido.dataVenda).toLocaleDateString()}<br>
               Total: R$ ${pedido.total.toFixed(2)}
@@ -509,7 +507,7 @@
 
   }
   async function criarPedido() {
-    let url = `http://localhost/venda`;
+    let url = `http://localhost:8090/venda`;
     let id = JSON.parse(localStorage.getItem("user")).id;
     let data = new Date();
     let dataentrega = document.getElementById("data_entrega").value;
@@ -517,29 +515,27 @@
     let frequencia = document.getElementById("frequencia").value;
     let totalCarrinho = document.getElementById("valor-total-carrinho").value;
     let metodoPag = "";
-    document.querySelector("input [name = metodoPag]").forEach(element => { 
-      if (element.checked) metodoPag = element.value; else metodoPag = "não informado";
+    const m = document.querySelector('input[name="metodoPag"]')
+    m.forEach(element => { 
+      if (element.checked) metodoPag = element.value;
     });
+    if (!metodoPag) { alert('Por favor, selecione um método de pagamento.'); return; }
 
 
-    let cartao;
-    let user = localStorage.getItem("user")
+    let cartao = null;
+    const user = localStorage.getItem("user")
     if(user.idCartaoCliente){
       cartao = user.idCartaoCliente
     } else {
       let num =document.getElementById("numero_cartao").value
       let val = document.getElementById("validade").value
       let cvv = document.getElementById("cvv").value
-      if(metodoPag === ""){
-        alert('Por favor, selecione um método de pagamento.');
-        return;
-      }
       if(num === "" || val === "" || cvv === ""){
         alert('Por favor, preencha os dados do cartão.');
         return;
       }
       //criar cartao
-      let urlCartao = `http://localhost/cartao`;
+      let urlCartao = `http://localhost:8090/cartao`;
       const optionsCartao = {
         method: 'POST',
         headers: {
@@ -582,7 +578,8 @@
         parcelamento: parcela,
         total: totalCarrinho,
         frequencia: frequencia,
-        dataEntrega: dataentrega
+        dataEntrega: dataentrega,
+        idCartao: cartao
       })
     }
     try {
