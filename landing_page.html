@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Principal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+        :root {
+      --bg: #fffaf3;
+      --surface: #ffffff;
+      --muted: #6b5848;
+      --accent: #ff8c00;
+      --accent-dark: #d46f00;
+      --text: #2f2218;
+      --radius: 12px;
+      --gap: 20px;
+      --container: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    
+
+    body {
+      font-family: "Inter", "Arial", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: linear-gradient(180deg, var(--accent-dark) 0%, var(--bg) 80%);
+      color: var(--text);
+      line-height: 1.45;
+      overflow-x: hidden;
+      height: 100%;
+      width: 100%;
+      /* evita scroll horizontal */
+    }
+
+    /* central container usado em várias seções */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: linear-gradient(200deg, #b36e2f 0%, var(--bg) 80%);
+    }
+
+    .logo {
+      width: 150px;
+      height: auto;
+      display: block;
+    }
+
+    header nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    header a:hover {
+      background: rgba(0, 0, 0, 0.03);
+      color: var(--text);
+    }
+
+    .botao {
+      background: var(--accent);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .botao:hover {
+      background: var(--accent-dark);
+    }
+
+    /* hero (mantém imagem com overlay) */
+    .hero {
+      position: relative;
+      background-image:
+        linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.22) 45%, rgba(0, 0, 0, 0.42) 100%),
+        url('imagens/hero.jpeg');
+      background-size: cover;
+      background-position: center;
+      min-height: clamp(320px, 48vh, 520px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 36px 16px;
+      color: #fff;
+      margin-bottom: 18px;
+    }
+
+    .hero .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 1100px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.4rem, 3.4vw, 2.6rem);
+      margin: 0 0 8px;
+      line-height: 1.02;
+      font-weight: 800;
+      text-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero p {
+      margin: 0 0 16px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .hero .cta {
+      background: var(--accent);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 10px 28px rgba(255, 140, 0, 0.12);
+      display: inline-block;
+    }
+
+    .hero .cta:hover {
+      background: var(--accent-dark);
+    }
+
+    /* Info cards (Como funciona) */
+    .int_cards {
+      margin: 16px auto;
+      padding: 8px 16px;
+      max-width: var(--container);
+      text-align: center;
+    }
+
+    .int_cards h1 {
+      margin-bottom: 14px;
+      font-size: 1.4rem;
+      color: var(--text);
+    }
+
+    .organiza_cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      align-items: start;
+      padding: 20px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), transparent);
+      border-radius: 12px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(15, 20, 25, 0.04);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      text-align: center;
+    }
+
+    .card img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    }
+
+    .card h1 {
+      font-size: 1.05rem;
+      margin: 0;
+      color: var(--text);
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    /* catálogo */
+    #catalogo {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 28px;
+      align-items: center;
+      padding: 36px 16px;
+      max-width: var(--container);
+      margin: 20px auto;
+      background: transparent;
+    }
+
+    #catalogo>div h1 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+    }
+
+    #catalogo p {
+      color: var(--muted);
+      margin: 0 0 8px;
+    }
+
+    #catalogo img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(15, 20, 25, 0.04);
+    }
+
+    #catalogo a {
+      display: inline-block;
+      margin-top: 12px;
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    #catalogo a:hover {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    /* sobre */
+    .sobre {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      padding: 28px 16px;
+      max-width: var(--container);
+      margin: 18px auto;
+    }
+
+    .sobre-img img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(15, 20, 25, 0.05);
+    }
+
+    .sobre-explica h1 {
+      margin: 0 0 8px;
+      font-size: 1.4rem;
+    }
+
+    .sobre-explica p {
+      color: var(--muted);
+    }
+
+    /* fale conosco / avaliações */
+    .fale-avalia {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: var(--container);
+      margin: 18px auto;
+      padding: 0 16px 20px;
+    }
+
+    .fale-comigo,
+    .avaliacoes {
+      background: var(--surface);
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(15, 20, 25, 0.04);
+    }
+
+    form label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #e6e0d8;
+      margin-bottom: 10px;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    #botao-form button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      width: 100%;
+    }
+
+    #botao-form button:hover {
+      background: var(--accent-dark);
+    }
+
+    .card-avaliacao {
+      padding: 12px;
+      border-radius: 10px;
+      background: #fff;
+      margin-bottom: 12px;
+    }
+
+    .card-usuario {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .card-usuario img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #f3f1ef;
+      padding: 6px;
+    }
+
+    /* footer */
+    footer {
+      background: linear-gradient(180deg, rgba(230, 203, 168, 0.9), rgba(230, 203, 168, 0.95));
+      padding: 22px 16px;
+      margin-top: 28px;
+    }
+
+    footer p {
+      margin: 0 0 10px;
+      color: var(--muted);
+    }
+
+    footer ul {
+      list-style: none;
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    /* utilitários e responsividade */
+    @media (max-width: 980px) {
+      #catalogo {
+        grid-template-columns: 1fr;
+      }
+
+      .sobre {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .fale-avalia {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .organiza_cards {
+        padding: 14px;
+        gap: 14px;
+      }
+
+      .card img {
+        width: 100px;
+        height: 100px;
+      }
+
+      header {
+        padding: 12px;
+      }
+
+      .logo {
+        width: 120px;
+      }
+
+      .hero {
+        padding: 22px 12px;
+      }
+    }
+
+
+    /* nota */
+    #nota {
+      width: 100%;
+      margin: 8px 0;
+      accent-color: var(--accent); /* cor personalizada para navegadores modernos */
+      height: 6px;
+      background: #ffe5c2;
+      border-radius: 8px;
+      outline: none;
+    }
+
+    #notap {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent-dark);
+      margin-top: 4px;
+      margin-bottom: 8px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+
+    /* acessibilidade */
+    a:focus,
+    button:focus,
+    input:focus,
+    textarea:focus {
+      outline: 3px solid rgba(255, 140, 0, 0.14);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <a href="landing_page.html"><img class="logo" src="imagens/Logo_final.png" alt=""></a>
+    </div>
+    <div>
+      <a href="produtos.html">Carrinho</a>
+      <a href="#sobre">Sobre</a>
+      <a href="PaginaCadastro.html">Cadastrar</a>
+      <a href="PaginaLogin.html" class="botao">Entrar</a>
+    </div>
+
+    <div>
+      <a id="bemvindo" hidden></a>
+      <!-- Bom dia usuário código -->
+    </div>
+  </header>
+
+  <section>
+    <section class="hero" aria-label="Frescor e praticidade direto do campo">
+      <div class="hero-content container">
+        <h1>Frescor e praticidade direto do campo para a sua casa</h1>
+        <p>Produtos selecionados, entregues com carinho — do produtor para sua mesa.</p>
+        <a class="cta" href="produtos.html">Monte seu carrinho</a>
+      </div>
+    </section>
+
+    <div class="int_cards">
+      <h1>Como funciona a DaRoça?</h1>
+      <div class="organiza_cards">
+        <div class="card">
+          <img src="imagens/motoqueiro.png" alt="">
+          <h1>Chegou <br> Fresquinho</h1>
+          <p>Produtos selecionados, direto do campo para a sua casa</p>
+        </div>
+        <div class="card">
+          <img src="imagens/cesta.png" alt="">
+          <h1>Variedade de produtos</h1>
+          <p>Frutas, verduras, legumes e muito mais para o seu dia a dia</p>
+        </div>
+        <div class="card">
+          <img src="imagens/cesta_verde.png" alt="">
+          <h1>Praticidade e cuidado</h1>
+          <p>Você escolhe a frequência da entrega e recebe sua cesta sempre com qualidade garantida.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="catalogo">
+      <div>
+        <h1>Catálogo</h1>
+        <h2>Frutas mais vendidas</h2>
+        <p>Banana, maçã, laranja e muito mais.</p>
+        <h2>Verduras mais vendidas</h2>
+        <p>Alface, couve, rúcula e opções frescas.</p>
+        <h2>Legumes mais vendidos</h2>
+        <p>Cenoura, batata, tomate e muito mais.</p>
+        <a href="produtos.html">Confira mais</a>
+      </div>
+      <img src="imagens/frutas.png" alt="Ilustração catálogo">
+    </div>
+
+    <div class="sobre" id="sobre">
+      <div class="sobre-img">
+        <img src="#" alt="">
+      </div>
+      <div class="sobre-explica">
+        <h1>Sobre</h1>
+        <h4>Conheça mais sobre nós</h4>
+        <p>Fundada em 2019 pela jovem Nathália, a DaRoça nasceu da paixão pelo campo unida à praticidade da vida
+          moderna. Nossa missão é levar até você produtos frescos, selecionados com carinho e entregues com todo
+          cuidado, para que sua rotina seja mais saudável e descomplicada.</p>
+      </div>
+    </div>
+
+    <div class="fale-avalia">
+      <div class="fale-comigo">
+        <form>
+          <h2>Fale Comigo</h2>
+          <div class="linha-formulario">
+            <div class="coluna-formulario">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder="nome" disabled>
+            </div>
+            <div class="coluna-formulario">
+              <label for="sobrenome">Sobrenome</label>
+              <input type="text" id="sobrenome" name="sobrenome" placeholder="sobrenome" disabled>
+            </div>
+          </div>
+
+          <div class="coluna-formulario">
+            <label for="email">Nota</label>
+            <input type="range" min="0" max="11" step="1" id="nota" name="nota">
+            <p id="notap"></p>
+          </div>
+
+          <div class="coluna-formulario">
+            <label for="mensagem">Sua mensagem</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Digite sua mensagem"></textarea>
+          </div>
+
+          <div id="botao-form">
+            <button type="button" onclick="postarAval()">Enviar</button>
+          </div>
+          <p id="resp" style="color:red; font-size:large;"></p>
+        </form>
+      </div>
+
+      <div class="avaliacoes">
+        <h1>Avaliações</h1>
+        <div class="card-avaliacao">
+          <p>"Produtos sempre fresquinhos e entrega super pontual!"</p>
+          <div class="card-usuario">
+            <img src="#" alt="">
+            <div class="card-info-usuario">
+              <p>Rafael</p>
+              <p>Cliente há 2 anos</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-avaliacao">
+          <p>"A DaRoça transformou minha rotina: produtos impecáveis e atendimento excelente!"</p>
+          <div class="card-usuario">
+            <img src="#" alt="">
+            <div class="card-info-usuario">
+              <p>Gabriel</p>
+              <p>Cliente há 4 meses</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-avaliacao">
+          <p>"Excelente atendimento e qualidade, recomendo demais a DaRoça!"</p>
+          <div class="card-usuario">
+            <img src="#" alt="">
+            <div class="card-info-usuario">
+              <p>Victor</p>
+              <p>Cliente a 8 meses</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 DaRoça - Todos os direitos reservados</p>
+    <ul>
+      <li><a>Facebook</a></li>
+      <li><a>Instagram</a></li>
+    </ul>
+  </footer>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const saudacao = document.getElementById("bemvindo");
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+      const token = localStorage.getItem("token");
+      const url = "http://localhost:8090/avaliacoes";
+      const boxaval = document.querySelector(".avaliacoes");
+
+      if (token) {
+        const botao = document.querySelector(".botao");
+        botao.innerHTML = "Sair";
+        botao.href = "#";
+        botao.onclick = () => {
+          if (confirm("Deseja realmente sair?")) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            window.location.reload();
+          }
+
+        }
+      }
+      if (user) {
+        saudacao.hidden = false;
+        saudacao.innerHTML = `Bem-vindo(a), ${user.prenome || "Usuário"}!`;
+        document.getElementById("nome").value = user.prenome;
+        document.getElementById("sobrenome").value = user.sobrenome;
+      }
+    
+      if (boxaval) boxaval.innerHTML = "<p>Carregando avaliações...</p>";
+      try{
+        const res = await fetch(url);
+        if(!res.ok) {
+          console.log("erro na busca")
+        }
+        const data = await res.json();
+
+        if(data.recordset.length === 0){
+          boxaval.innerHTML = "<p>Nenhuma avaliação encontrada.</p>";
+          return;
+        }
+        let avaliacoes = '';
+        data.recordset.forEach(element => {
+          avaliacoes += `
+          <div class="card-avaliacao">
+            <p>"${element.texto}"</p>
+            <div class="card-usuario">
+              <img src="#" alt="#">
+              <div class="card-info-usuario">
+                <p>${element.prenome + ' ' + element.sobrenome}</p>
+                <p>Nota: ${element.nota}</p>
+              </div>
+            </div>
+          </div>
+          `// colocar a imagem no banco de dados img => ${element.img}
+        });
+        boxaval.innerHTML = avaliacoes;
+      }catch(err){
+        console.log("erro ao carregar", err)
+        boxaval.innerHTML = "Nao foi possivel carregar as avaliações"
+      }
+    });
+
+    document.getElementById("nota").addEventListener("input", () => {
+    document.getElementById("notap").innerHTML = document.getElementById("nota").value;
+    });
+
+    async function postarAval(){
+      const user = JSON.parse(localStorage.getItem("user") || "null");
+      console.log(user)
+      const texto = document.getElementById("mensagem").value;
+      console.log(texto)
+      const nota = document.getElementById("nota").value;
+      console.log(nota)
+      const resp = document.getElementById("resp")
+      if (user === null){
+        resp.innerHTML = "Cadastre-se/logue para fazer uma avaliação"
+      }else{
+        const idcli = user.idCliente
+        console.log(idcli)
+        const options = {
+          method: "POST",
+          body: JSON.stringify({
+            idCliente: Number(idcli),
+            texto: texto,
+            nota: Number(nota)
+          }),
+          headers: { 'Content-type': 'application/json' },
+        }
+        try {
+          const result = await fetch("http://localhost:8090/postavaliacao", options);
+          const dados = await result.json();
+          console.log(dados);
+
+          if (result.ok) {
+            console.log("sucesso na avaliação");
+            resp.innerHTML = ('Obrigado por sua avaliação!');
+            resp.style.color = 'green';
+          } else {
+            console.log("Erro de avaliação não valida ");
+            resp.innerHTML = ('Erro de cadastro não valido');
+            resp.style.color = 'red';
+          }
+        } catch (error) {
+          console.error("Erro na inserção", error.message);
+          resp.innerHTML = ("Erro na inserção");
+          resp.style.color = 'red';
+        }
+      }
+      
+    }
+
+
+  </script>
+</body>
+
+</html>

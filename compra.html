@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+
+    :root {
+      --bg: #fffaf3;
+      --surface: #ffffff;
+      --muted: #6b5848;
+      --accent: #ff8c00;
+      --accent-dark: #d46f00;
+      --text: #2f2218;
+      --radius: 12px;
+      --gap: 20px;
+      --container: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    
+
+    body {
+      font-family: "Inter", "Arial", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: linear-gradient(180deg, var(--accent-dark) 0%, var(--bg) 80%);
+      color: var(--text);
+      line-height: 1.45;
+      overflow-x: hidden;
+      height: 100%;
+      width: 100%;
+      /* evita scroll horizontal */
+    }
+
+    /* central container usado em várias seções */
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* header */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: linear-gradient(200deg, #b36e2f 0%, var(--bg) 80%);
+    }
+
+    .logo {
+      width: 150px;
+      height: auto;
+      display: block;
+    }
+
+    header nav {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    header a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 10px;
+      border-radius: 8px;
+    }
+
+    header a:hover {
+      background: rgba(0, 0, 0, 0.03);
+      color: var(--text);
+    }
+
+    .botao {
+      background: var(--accent);
+      color: white;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    .botao:hover {
+      background: var(--accent-dark);
+    }
+
+    h1,
+    h2,
+    h3 {
+      text-align: center;
+    }
+
+    .logo {
+      width: 146px;
+      height: 71px;
+    }
+
+    a {
+      color: #5E3023;
+      text-decoration: none;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    .botao {
+      color: #FFFDFD;
+      background-color: #FF8C00;
+      padding: 15px;
+      border-radius: 5px;
+    }
+
+    section {
+      background-color: #fff5e6;
+      padding: 20px 30px;
+      border-radius: 8px;
+      width: 800px;
+      margin: auto
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .row input {
+      flex: 1;
+    }
+
+    .cards img {
+      height: 25px;
+      margin-right: 5px;
+    }
+
+    .cards {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .valor-total {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    form > button {
+      background-color: #FF9900;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      padding: 12px;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #e68a00;
+    }
+
+    footer {
+      background: #E6CBA8;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer ul {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+    }
+
+    footer li {
+      cursor: pointer;
+    }
+
+    footer ul li a:hover {
+      color: white;
+    }
+
+    /* Estilos adicionais para a seção de carrinho */
+    #carrinho-compra {
+      background: #fff5e6;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px #0001;
+    }
+
+    #lista-carrinho-compra {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+      margin-bottom: 10px;
+    }
+
+    #lista-carrinho-compra div {
+      padding: 8px 0;
+    }
+
+
+    /*side bar*/
+    .sidebar {
+      display: block;
+      top: 0px;
+      right: 0;
+      translate: 0px 0px;
+      min-height: 100vh;
+      min-width: 200px;
+      width: 250px;
+      position: fixed;
+      background-color: #333;
+      translate: 100% 0px;
+      transition: 0.5s ease;
+      margin-top: 97px;
+    }
+    .sidebar.open {
+      translate: 0px 0px;
+    }
+    button{
+      background-color: #FF9900;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      padding: 12px;
+      cursor: pointer;
+      
+    }
+    .sidebar > p {
+      color: white;
+      padding: 10px;
+      font-size: large;
+      background-color: #d46f00;
+      border-radius: 10px;
+      margin: 10px
+    }
+    .sidebar div {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      background-color: #fff;
+      color: #000;
+      padding: 10px;
+      border-radius: 5px;
+      margin-top: 10px
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div>
+      <img class="logo" src="imagens/logo_final.png" alt="">
+    </div>
+    <div>
+      <a href="produtos.html">Carrinho</a>
+      <a href="landing_page.html">Sobre</a>
+      <a href="PaginaCadastro.html">Cadastrar</a>
+      <a href="PaginaLogin.html" class="botao">Entrar</a>
+    </div>
+    <button class="menu-button" aria-expanded="false" aria-controls="sidebar-menu">
+      Pedidos anteriores
+    </button>
+  </header>
+  <aside class="sidebar">
+    <p>ok</p>
+  </aside>
+ 
+  <section style="display: flex; gap: 40px; justify-content: center; align-items: flex-start;">
+    <form style="flex: 1; min-width: 350px;">
+      <h1>FINALIZE SUA COMPRA</h1>
+      <label>Nome:</label>
+      <input type="text" id="nome">
+
+      <label>E-mail</label>
+      <input type="email" id="email">
+
+      <div class="row">
+        <div>
+          <label>Celular com DDD</label>
+          <input type="tel" id="celular">
+        </div>
+        <div>
+          <label>CPF/CNPJ</label>
+          <input type="text" id="cpf">
+        </div>
+      </div>
+
+      <div class="cards" style="display: flex; align-items: center; gap: 20px;">
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <input type="radio" id="mastercard" name="metodoPag" value = '1'>
+          <label for="mastercard" style="margin: 0; padding: 0;"> </label>
+          <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard" />
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <input type="radio" id="visa" name="metodoPag" value="2">
+          <label for="visa" style="margin: 0; padding: 0;"> </label>
+          <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa" />
+        </div>
+      </div>
+
+      <label>Número do cartão</label>
+      <input type="text" id="numero_cartao">
+
+      <div class="row">
+        <div>
+          <label>Validade</label>
+          <input type="date" id="validade">
+        </div>
+        <div>
+          <label>CVV</label>
+          <input type="text" id="cvv">
+        </div>
+      </div>
+
+      <label>Parcelamento</label>
+      <select id="parcelamento">
+        <option value="1">1x sem juros</option>
+        <option value="2">2x sem juros</option>
+        <option value="3">3x sem juros</option>
+        <option value="4">6x</option>
+        <option value="5">12x</option>
+      </select>
+
+
+      <div class="row">
+        <div>
+          <label>Frequencia</label>
+          <select id="frequencia">
+            <option value="1">Pedido Unico</option>
+            <option value="2">Semanal</option>
+            <option value="3">Quinzenal</option>
+            <option value="4">Mensal</option>
+            <option value="5">Bimestral</option>
+          </select>
+        </div>
+      
+        <div id="dataentrega">
+          <label>Data de Entrega</label>
+          <input type="date" id="data_entrega" placeholder="DD/MM/AAAA">
+        </div>
+      
+      </div>
+
+      <div class="valor-total">
+        VALOR TOTAL: <span id="valor-total-carrinho">R$ 0,00</span>
+      </div>
+
+      <button class="botaofin" >FINALIZAR AGORA</button>
+    </form>
+    <aside id="carrinho-compra" style="flex: 1; min-width: 300px;">
+      <h2>Seu Carrinho</h2>
+      <div id="lista-carrinho-compra"></div>
+      <div style="margin-top: 15px; font-weight: bold;">Total: <span id="total-carrinho-aside">R$ 0,00</span>
+      </div>
+    </aside>
+  </section>
+  <footer>
+    <p>© 2025 DaRoça - Todos os direitos reservados</p>
+    <ul>
+      <li><a>Facebook</a></li>
+      <li><a>Instagram</a></li>
+    </ul>
+  </footer>
+</body>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Preenchimento automático dos campos do formulário com dados do usuário
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      if (user.prenome) document.getElementById("nome").value = user.prenome;
+      if (user.email) document.getElementById("email").value = user.email;
+      if (user.celular) document.getElementById("celular").value = user.celular;
+      if (user.cpf) document.getElementById("cpf").value = user.cpf;
+
+      exibePedidosDoUser(user.id);
+      document.getElementById("nome").value = user.prenome + " " + user.sobrenome;
+      document.getElementById("email").value = user.email;
+      document.getElementById("celular").value = user.celular;
+      document.getElementById("cpf").value = user.cpf;
+
+
+      if(user.idCartaoCliente){
+        document.getElementById("numero_cartao").style.display = user.numero;
+        document.getElementById("validade").style.display = user.validade;
+        document.getElementById("cvv").style.display = user.cvv;
+      }
+    }else {
+      sidebar.innerHTML = "<p>Faça login para ver seus pedidos anteriores.</p>";
+    }
+    // Carrinho: busca do localStorage e exibição
+    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+    let total = 0;
+    let html = "";
+    carrinho.forEach(item => {
+      html += `<div style='border-bottom:1px solid #ccc; margin-bottom:8px; padding-bottom:8px;'>
+        <strong>${item.nome}</strong> - R$ ${item.valor.toFixed(2)} x ${item.qtd}
+      </div>`;
+      total += item.valor * item.qtd;
+    });
+    document.getElementById("lista-carrinho-compra").innerHTML = html || "<em>Carrinho vazio</em>";
+    document.getElementById("total-carrinho-aside").innerText = `R$ ${total.toFixed(2)}`;
+    document.getElementById("total-carrinho-aside").value = total.toFixed(2)
+    document.getElementById("valor-total-carrinho").innerText = `R$ ${total.toFixed(2)}`;
+    document.getElementById("valor-total-carrinho").value = total.toFixed(2)
+  });
+
+  /*Logout*/
+  document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    
+    if  (token){
+      const botao = document.querySelector(".botao");
+      botao.innerHTML = "Sair";
+      botao.href = "landing_page.html";
+      botao.onclick = () => {
+        if(confirm("Deseja realmente sair?")){
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          window.location.reload();
+        }
+      }
+    }else{ 
+      const botao = document.querySelector(".botaofin");
+      botao.innerHTML = "FAZER LOGIN PARA FINALIZAR A COMPRA";
+      botao.disabled = true;
+      botao.style.backgroundColor = "#ff8c0060";
+    }
+  });
+
+
+  /*Side Bar*/
+  const menuButton = document.querySelector('.menu-button');
+  const sidebar = document.querySelector('.sidebar');
+
+  menuButton.addEventListener('click', () => {
+    console.log('toggle')
+    const expanded = menuButton.getAttribute('aria-expanded') === 'true' || false;
+    menuButton.setAttribute('aria-expanded', !expanded);
+    sidebar.classList.toggle('open');
+  });
+
+  async function exibePedidosDoUser(id) {
+    let pedidos;  
+    let cardsPedidos = "";
+    let url = `http://localhost/venda/${id}`
+    try{
+      sidebar.innerHTML = "<p>Carregando pedidos.</p>";
+        await fetch(url)
+          .then(res => res.json())
+          .then(dados => console.log(dados))
+          .then(result => pedidos = result)
+          .catch(err => console.error('Erro ao buscar pedidos:', err));
+        console.log(pedidos);
+        if (!pedidos || pedidos.length === 0) {
+          sidebar.innerHTML = "<p>Nenhum pedido encontrado.</p>";
+          return;
+        }
+        pedidos.forEach(pedido => {
+          cardsPedidos += `
+            <div 
+
+            >
+              <strong>Pedido ID: ${pedido.id}</strong><br>
+              Data: ${new Date(pedido.dataVenda).toLocaleDateString()}<br>
+              Total: R$ ${pedido.total.toFixed(2)}
+            </div>
+          `;
+        });
+        sidebar.innerHTML = cardsPedidos;
+    }catch (error) {
+      console.error('Erro ao buscar pedidos:', error);
+      sidebar.innerHTML = "<p>Erro ao carregar pedidos.</p>";
+      return;
+    };
+
+  }
+  async function criarPedido() {
+    let url = `http://localhost/venda`;
+    let id = JSON.parse(localStorage.getItem("user")).id;
+    let data = new Date();
+    let dataentrega = document.getElementById("data_entrega").value;
+    let parcela = document.getElementById("parcelamento").value;
+    let frequencia = document.getElementById("frequencia").value;
+    let totalCarrinho = document.getElementById("valor-total-carrinho").value;
+    let metodoPag = "";
+    document.querySelector("input [name = metodoPag]").forEach(element => { 
+      if (element.checked) metodoPag = element.value; else metodoPag = "não informado";
+    });
+
+
+    let cartao;
+    let user = localStorage.getItem("user")
+    if(user.idCartaoCliente){
+      cartao = user.idCartaoCliente
+    } else {
+      let num =document.getElementById("numero_cartao").value
+      let val = document.getElementById("validade").value
+      let cvv = document.getElementById("cvv").value
+      if(metodoPag === ""){
+        alert('Por favor, selecione um método de pagamento.');
+        return;
+      }
+      if(num === "" || val === "" || cvv === ""){
+        alert('Por favor, preencha os dados do cartão.');
+        return;
+      }
+      //criar cartao
+      let urlCartao = `http://localhost/cartao`;
+      const optionsCartao = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          idCliente: user.id,
+          numeroCartao: num,
+          cvv: cvv,
+          validade: val
+        })
+      }
+      try {
+        let responseCartao = await fetch(urlCartao, optionsCartao);
+        if (!responseCartao.ok) {
+          console.error('Erro na inserção do cartão', error);
+          alert('Erro ao criar o cartão. Por favor, tente novamente.');
+          return;
+        }else {
+          let dadosCartao = await responseCartao.json();
+          cartao = dadosCartao.id;
+        }
+        
+      } catch (error) {
+        console.error('Erro ao criar o cartão:', error);
+        alert('Erro ao criar o cartão. Por favor, tente novamente.');
+        return;
+      }
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        dataVenda: data.toISOString(),
+        idCliente: id,
+        formaPagamento: metodoPag,
+        parcelamento: parcela,
+        total: totalCarrinho,
+        frequencia: frequencia,
+        dataEntrega: dataentrega
+      })
+    }
+    try {
+
+      let response = await fetch(url, options);
+      if (!response.ok) {
+        console.error('Erro na inserção', error);
+        alert('Erro ao criar o pedido. Por favor, tente novamente.');
+        return;
+      }else {
+        alert('Pedido criado com sucesso!');
+        localStorage.removeItem("carrinho");
+        window.location.href = "produtos.html";
+      }
+      
+    } catch (error) {
+      console.error('Erro ao criar o pedido:', error);
+      alert('Erro ao criar o pedido. Por favor, tente novamente.');
+    }
+  }
+
+</script>
+
+</html>
