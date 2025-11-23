@@ -4,18 +4,19 @@ const { MAX } = require("mssql");
 
 
 async function cadastroPedido(pedido) {
-    const {data_pedido, id_cliente, id_forma_de_pagamento, parcela, total, id_freq, data_entrega} = pedido;
+    const {dataVenda, idCliente, formaPagamento, parcelamento, total, frequencia, dataEntrega, catao} = pedido;
     try {
-        const query = `INSERT INTO daroca.Venda (dataVenda ,idCliente ,idFormaPagamento ,quantasParcelas, referencia_frequencia, vanda_cartaocliente, dataEntrega, totalVenda)
-        VALUES (@data_pedido, @id_cliente, @id_forma_de_pagamento, @parcela, @id_freq, NULL, @data_entrega, @total)`
+        const query = `INSERT INTO daroca.Venda (dataVenda ,idCliente ,idFormaPagamento ,quantasParcelas, referencia_frequencia, venda_cartaocliente , dataEntrega, totalVenda)
+        VALUES (@dataVenda, @idCliente, @formaPagamento, @parcelamento, @frequencia, @cartao, @dataEntrega, @total)`
         await mssql.connect(stringSQL);
         const request = new mssql.Request();    
-        request.input('data_pedido', mssql.Date, data_pedido)
-        request.input('id_cliente', mssql.Int, id_cliente)
-        request.input('id_forma_de_pagamento', mssql.Int, id_forma_de_pagamento)
-        request.input('qtd_parcela', mssql.Int, parcela)
-        request.input('id_freq', mssql.Int, id_freq)
-        request.input('data_entrega', mssql.Date, data_entrega)
+        request.input('dataVenda', mssql.Date, dataVenda)
+        request.input('idCliente', mssql.Int, idCliente)
+        request.input('formaPagamento', mssql.Int, formaPagamento)
+        request.input('parcelamento', mssql.Int, parcelamento)
+        request.input('frequencia', mssql.Int, frequencia)
+        request.input('cartao', mssql.Int, catao)
+        request.input('dataEntrega', mssql.Date, dataEntrega)
         request.input('total', mssql.Decimal(10,2), total)
 
         await request.query(query)
@@ -28,45 +29,38 @@ async function cadastroPedido(pedido) {
     }
 }
 
-async function getPedidoPorId(id){
-    try{
-
-        const query = " SELECT TOP(10) cliente.* FROM daroca.Venda WHERE idCliente = @id"
+async function getPedidoPorId(id) {
+    try {
+        const query = "SELECT TOP(10) * FROM daroca.Venda WHERE idCliente = @id ORDER BY dataVenda DESC";
         await mssql.connect(stringSQL);
         const request = new mssql.Request();
         request.input('id', mssql.Int, id);
-    
-        result = await request.query(query);
-        if (!result){
-            return {mensagem: "Usuario nao tem pedidos"}
-        }else{
-            return result;   
-        }
-    }catch(erro){
-        console.error("Erro na busca de dados: "+ erro.message);
+        const res = await request.query(query);
+        return res.recordset || [];
+    } catch (erro) {
+        console.error("Erro na busca de pedidos por id: " + erro.message);
         throw erro;
     }
-}  
-async function getPedidoPorEmail(email){
-    try{
+}
 
-        const query = " SELECT TOP(10) cliente.* FROM daroca.Venda WHERE email = @email"
+async function getPedidoPorEmail(email) {
+    try {
+        const query = `
+            SELECT TOP(10) v.*
+            FROM daroca.Venda v
+            JOIN daroca.cliente c ON v.idCliente = c.idCliente
+            WHERE c.email = @email
+            ORDER BY v.dataVenda DESC
+        `;
         await mssql.connect(stringSQL);
         const request = new mssql.Request();
         request.input('email', mssql.VarChar(50), email);
-    
-        result = await request.query(query);
-        if (!result){
-            return {mensagem: "Usuario nao tem pedidos"}
-        }else{
-            return result;   
-        }
-    }catch(erro){
-        console.error("Erro na busca de dados: "+ erro.message);
+        const res = await request.query(query);
+        return res.recordset || [];
+    } catch (erro) {
+        console.error("Erro na busca de pedidos por email: " + erro.message);
         throw erro;
     }
-
 }
-
 
 module.exports = {cadastroPedido, getPedidoPorId, getPedidoPorEmail}
